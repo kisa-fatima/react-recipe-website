@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Recipes from "./pages/Recipes";
 import StartHere from "./pages/StartHere";
 import "./styles/global.css";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -22,6 +23,8 @@ export default function App() {
           </Routes>
         </Layout.Content>
       </Layout>
+
+      <Footer />
     </Router>
   );
 }
