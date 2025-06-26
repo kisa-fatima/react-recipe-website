@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+.home-banner-row {
+  min-height: unset;
+  background: var(--light-text-color);
+  margin: 0;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.home-banner-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: center;
+  padding: 0rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-banner-title {
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dark-text-color);
+  font-family: Georgia, serif;
+}
+
+.home-banner-script {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-left: 0.5em;
+  vertical-align: middle;
+  letter-spacing: 0.01em;
+}
+
+.script-text {
+  font-family: 'Dancing Script', cursive, 'Pacifico', sans-serif !important;
+}
+
+@media (max-width: 600px) {
+  .home-banner-title,
+  .home-banner-script {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .home-banner-card {
+    padding: 0 0.2rem;
+  }
+}
