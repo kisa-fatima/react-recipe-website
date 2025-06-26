@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+/* Enhanced slick carousel arrow visibility and style */
+.slick-arrow {
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 10;
+  background: #282c34 !important;
+  color: #fff !important;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: none;
+  font-size: 24px;
+  transition: background 0.2s;
+}
+.slick-arrow:before {
+  color: #fff !important;
+  font-size: 24px !important;
+  opacity: 1 !important;
+}
+.slick-prev {
+  left: -50px !important;
+}
+.slick-next {
+  right: -50px !important;
+}
