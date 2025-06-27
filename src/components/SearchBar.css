@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+
+.searchbar-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 32px 0 24px 0;
+  justify-content: center;
+}
+
+.searchbar-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e0e0e0;
+  border-radius: 2px;
+  background: #fff;
+  padding: 8px 16px;
+  flex: 1 1 400px;
+  max-width: 500px;
+}
+
+.searchbar-icon {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.searchbar-input {
+    font-family: 'Times New Roman', Times, serif;
+  border: none;
+  outline: none;
+  font-size: 1.15rem;
+  color: #333;
+  width: 100%;
+  background: transparent;
+}
+
+.searchbar-or {
+    font-family: 'Dancing Script', cursive, 'Pacifico', sans-serif !important;
+  color: #aaa;
+  font-size: 2rem;
+  margin: 0 2px;
+}
+
+.searchbar-viewall {
+    font-family: 'Arvo', serif;
+  background: #7B4A65;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 2px;
+  padding: 16px 32px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.2s;
+}
+
+.searchbar-viewall:hover {
+  background: #5a3247;
+}
+
+@media (max-width: 600px) {
+  .searchbar-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .searchbar-or {
+    display: none;
+  }
+  .searchbar-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .searchbar-viewall {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 14px 0;
+    font-size: 1rem;
+    display: block;
+  }
+  .searchbar-input-wrapper {
+    max-width: 350px;
+    width: 100%;
+    margin: 0 auto;
+    flex: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .category-banner-small-slider-wrap {
+    padding: 1rem 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+  .category-banner-big {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+}

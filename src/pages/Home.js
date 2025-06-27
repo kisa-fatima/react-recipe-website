@@ -3,10 +3,12 @@ import { Row, Col, Card } from 'antd';
 import './Home.css';
 import CategoryBannerBig from '../components/CategoryBannerBig';
 import CategoryBannerSmall from '../components/CategoryBannerSmall';
+import SearchBar from '../components/SearchBar';
 
 const Home = () => {
   return (
     <>
+      
       <Row justify="center" align="middle" className="home-banner-row">
         <Col span={24}>
           <Card bordered={false} className="home-banner-card">
@@ -21,6 +23,9 @@ const Home = () => {
       </Row>
       <CategoryBannerBig />
       <CategoryBannerSmall />
+      <div className="searchbar-center-wrapper">
+        <SearchBar />
+      </div>
     </>
   );
 };

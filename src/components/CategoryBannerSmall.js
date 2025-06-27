@@ -2,9 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { fetchRecipeCusineTypes } from '../services/recipeApi';
 import CircleCard from './CircleCard';
 import Slider from 'react-slick';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './CircleCard.css';
+import './CategoryBannerSmall.css';
+
+const ArrowLeft = (props) => (
+  <button {...props} className="custom-slick-arrow custom-slick-prev" aria-label="Previous">
+    <FiChevronLeft size={18} />
+  </button>
+);
+const ArrowRight = (props) => (
+  <button {...props} className="custom-slick-arrow custom-slick-next" aria-label="Next">
+    <FiChevronRight size={18} />
+  </button>
+);
 
 const CategoryBannerSmall = () => {
   const [categories, setCategories] = useState([]);
@@ -24,6 +36,8 @@ const CategoryBannerSmall = () => {
     slidesToShow: 9,
     slidesToScroll: 3,
     arrows: true,
+    nextArrow: <ArrowRight />,
+    prevArrow: <ArrowLeft />,
     responsive: [
       {
         breakpoint: 1100,
