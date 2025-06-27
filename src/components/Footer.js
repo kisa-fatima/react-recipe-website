@@ -38,8 +38,8 @@ const Footer = () => (
             <li>Meal Prep Recipes</li>
           </ul>
         </Col>
-        <Col xs={24} md={12} className="footer-signup-col footer-signup-mobile-hide">
-          <div className="footer-signup-box">
+        <Col xs={24} md={12} className="footer-signup-col">
+          <div className="footer-signup-box footer-signup-mobile-hide">
             <div className="footer-signup-title">
               <span className="footer-signup-script">signup</span> FOR EMAIL UPDATES
             </div>
@@ -52,7 +52,7 @@ const Footer = () => (
               <Button className="footer-signup-btn">GO</Button>
             </div>
           </div>
-          <div className="footer-brands" style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <div className="footer-brands footer-brands-mobile-hide" style={{ textAlign: 'center', marginTop: '1.5rem' }}>
             <div className="footer-brands-title">OUR OTHER BRANDS</div>
             <div className="footer-brands-logos" style={{ justifyContent: 'center' }}>
               <a href="https://www.foodbloggerpro.com/" target="_blank" rel="noopener noreferrer">

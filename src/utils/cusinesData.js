@@ -42,7 +42,7 @@ export const cuisinesData = [
     {
       name: "Korean",
       description: "Known for BBQ, kimchi, and bold fermented flavors.",
-      image: "https://images.pexels.com/photos/832182/pexels-photo-832182.jpeg"
+      image: "https://images.pexels.com/photos/262897/pexels-photo-262897.jpeg"
     },
     {
       name: "Greek",

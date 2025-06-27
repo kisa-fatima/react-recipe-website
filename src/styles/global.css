@@ -245,7 +245,7 @@
 }
 .footer-signup-btn {
   background: var(--secondary-color);
-  color: var(--primary-color);
+  color: var(--light-text-color);
   font-weight: bold;
   border: none;
   border-radius: 0;
@@ -405,6 +405,7 @@
   .footer-brands {
     text-align: left;
     margin-top: 1.2rem;
+    display: block !important;
   }
   .footer-brands-logos {
     justify-content: flex-start;
@@ -457,6 +458,12 @@
   }
   .footer-logo-row .footer-copyright {
     text-align: center;
+  }
+  .footer-brands {
+    display: none !important;
+  }
+  .footer-brands-mobile-hide {
+    display: none !important;
   }
 }
 
