@@ -93,14 +93,34 @@
 
 @media (max-width: 700px) {
   .category-banner-small-slider-wrap {
-    padding: 1rem 0;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
+    padding: 0;
+    overflow-x: hidden;
   }
-  .category-banner-big {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
+  .category-banner-small-slider .slick-track {
+    justify-content: center;
+    display: flex !important;
+  }
+  .category-banner-small-slider .circle-card {
+    margin: 0 !important;
+  }
+  .circle-card-img-wrapper {
+    width: 60px;
+    height: 60px;
+    max-width: 60px;
+    max-height: 60px;
+  }
+  .circle-card-label {
+    font-size: 0.6rem;
+  }
+  .custom-slick-prev {
+    left: -10px;
+  }
+  .custom-slick-next {
+    right: -10px;
+  }
+  .custom-slick-arrow {
+    width: 22px;
+    height: 22px;
+    font-size: 0.9rem;
   }
 }
