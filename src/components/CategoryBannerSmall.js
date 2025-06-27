@@ -18,8 +18,19 @@ const ArrowRight = (props) => (
   </button>
 );
 
+function useIsMobile(breakpoint = 700) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= breakpoint);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 const CategoryBannerSmall = () => {
   const [categories, setCategories] = useState([]);
+  const isMobile = useIsMobile(700);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -62,11 +73,19 @@ const CategoryBannerSmall = () => {
 
   return (
     <div className="category-banner-small-slider-wrap">
-      <Slider {...settings} className="category-banner-small-slider">
-        {categories.map((cat) => (
-          <CircleCard key={cat.name} image={cat.image} label={cat.name} />
-        ))}
-      </Slider>
+      {isMobile ? (
+        <div className="category-banner-small-scroll-row">
+          {categories.map((cat) => (
+            <CircleCard key={cat.name} image={cat.image} label={cat.name} />
+          ))}
+        </div>
+      ) : (
+        <Slider {...settings} className="category-banner-small-slider">
+          {categories.map((cat) => (
+            <CircleCard key={cat.name} image={cat.image} label={cat.name} />
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };

@@ -38,41 +38,82 @@
 
 @media (max-width: 700px) {
   .category-banner-small-slider-wrap {
-    padding: 1rem 0.2rem;
+    padding: 0;
+    overflow-x: hidden;
   }
   .category-banner-small-slider .slick-track {
     justify-content: center;
     display: flex !important;
   }
   .category-banner-small-slider .circle-card {
-    min-width: 70px;
-    width: 70px;
-    max-width: 70px;
-    margin: 0 1px;
+    min-width: 33vw !important;
+    width: 33vw !important;
+    max-width: 33vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   .circle-card-img-wrapper {
-    width: 70px;
-    height: 70px;
-    max-width: 70px;
-    max-height: 70px;
+    width: 33vw !important;
+    height: 33vw !important;
+    max-width: 33vw !important;
+    max-height: 33vw !important;
   }
   .circle-card-label {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
   .custom-slick-prev {
-    left: -18px;
+    left: -10px;
   }
   .custom-slick-next {
-    right: -18px;
+    right: -10px;
   }
   .custom-slick-arrow {
-    width: 24px;
-    height: 24px;
-    font-size: 1rem;
+    width: 22px;
+    height: 22px;
+    font-size: 0.9rem;
+  }
+  .category-banner-small-scroll-row {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    scrollbar-width: none;
+  }
+  .category-banner-small-scroll-row::-webkit-scrollbar {
+    display: none;
+  }
+  .category-banner-small-scroll-row .circle-card {
+    min-width: 33vw !important;
+    width: 33vw !important;
+    max-width: 33vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .category-banner-small-scroll-row .circle-card-img-wrapper {
+    width: 33vw !important;
+    height: 33vw !important;
+    max-width: 33vw !important;
+    max-height: 33vw !important;
   }
 }
 
 @media (max-width: 900px) {
+  .footer-mobile-cols-row {
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    display: flex !important;
+  }
+  .footer-mobile-cols-row > .ant-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    box-sizing: border-box;
+    padding-left: 0;
+    padding-right: 0;
+  }
   .custom-slick-prev {
     left: -24px;
   }
@@ -83,5 +124,20 @@
     width: 32px;
     height: 32px;
     font-size: 1.2rem;
+  }
+  .footer-mobile-cols-row > .ant-col {
+    box-sizing: border-box;
+    padding-left: 8px;
+    padding-right: 8px;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .footer-links {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
