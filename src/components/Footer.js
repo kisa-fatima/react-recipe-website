@@ -10,8 +10,8 @@ import { FaPinterestP, FaTiktok, FaXTwitter } from 'react-icons/fa6';
 const Footer = () => (
   <footer className="footer-wrapper">
     <div className="footer-main">
-      <Row gutter={[0, 32]} justify="center">
-        <Col xs={24} md={6}>
+      <Row gutter={[0, 32]} justify="center" className="footer-mobile-cols-row">
+        <Col xs={12} md={6}>
           <div className="footer-col-title">PINCH OF YUM</div>
           <ul className="footer-links">
             <li>About</li>
@@ -24,7 +24,7 @@ const Footer = () => (
             <li>Contact</li>
           </ul>
         </Col>
-        <Col xs={24} md={6}>
+        <Col xs={12} md={6}>
           <div className="footer-col-title">FOOD & RECIPES</div>
           <ul className="footer-links">
             <li>Sugar Free January</li>
@@ -38,7 +38,7 @@ const Footer = () => (
             <li>Meal Prep Recipes</li>
           </ul>
         </Col>
-        <Col xs={24} md={12} className="footer-signup-col">
+        <Col xs={24} md={12} className="footer-signup-col footer-signup-mobile-hide">
           <div className="footer-signup-box">
             <div className="footer-signup-title">
               <span className="footer-signup-script">signup</span> FOR EMAIL UPDATES
@@ -50,6 +50,17 @@ const Footer = () => (
               <Input placeholder="First Name" className="footer-signup-input" />
               <Input placeholder="Email" className="footer-signup-input" />
               <Button className="footer-signup-btn">GO</Button>
+            </div>
+          </div>
+          <div className="footer-brands" style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+            <div className="footer-brands-title">OUR OTHER BRANDS</div>
+            <div className="footer-brands-logos" style={{ justifyContent: 'center' }}>
+              <a href="https://www.foodbloggerpro.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://pinchofyum.com/wp-content/assets/images/food-blogger-pro-logo.png" alt="Food Blogger Pro" className="footer-brand-img grayscale-hover" />
+              </a>
+              <a href="https://www.clariti.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://th.bing.com/th/id/OIP.SGes1v1XuAIPURzmgaVnDQHaC9?rs=1&pid=ImgDetMain&cb=idpwebpc2" alt="Clariti" className="footer-brand-img grayscale-hover" />
+              </a>
             </div>
           </div>
         </Col>
@@ -70,7 +81,7 @@ const Footer = () => (
       </Row>
       <Row className="footer-logo-row" align="middle">
         <Col span={24}>
-          <div className="footer-logo-copyright-flex" style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="footer-logo-copyright-flex">
             <div className="footer-logo">
               <span className="logo-main">pinch</span><span className="logo-of">of</span><span className="logo-main">yum</span>
             </div>
@@ -81,19 +92,10 @@ const Footer = () => (
           </div>
         </Col>
       </Row>
-      <Row>
-        <Col span={24} className="footer-brands" style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-          <div className="footer-brands-title">OUR OTHER BRANDS</div>
-          <div className="footer-brands-logos" style={{ justifyContent: 'center' }}>
-            <img src="https://cdn.pinchofyum.com/wp-content/themes/poy-2023/assets/images/food-blogger-pro-logo.png" alt="Food Blogger Pro" className="footer-brand-img" />
-            <img src="https://cdn.pinchofyum.com/wp-content/themes/poy-2023/assets/images/clariti-logo.svg" alt="Clariti" className="footer-brand-img" />
-          </div>
-        </Col>
-      </Row>
       <Row justify="center" className="footer-legal-row">
         <Col>
           <a href="#" className="footer-legal-link">Privacy Policy</a>
-          <span className="footer-legal-sep">Terms</span>
+          <a href="#" className="footer-legal-link">Terms</a>
         </Col>
       </Row>
       <Row justify="center" className="footer-ad-row">
