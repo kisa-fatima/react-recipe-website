@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap');
+
+.info-div {
+  width: 100%;
+  margin: 0;
+  background: #fff;
+}
+
+.info-section {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  column-gap: 0px;
+  max-width: 1200px;
+  padding: 48px 24px 0 24px;
+  background: #fff;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-card {
+  background: #f5f5f5;
+  padding: 48px 32px 48px 32px;
+  border-radius: 0;
+  max-width: 400px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  margin-right: -38px;
+}
+
+.info-title {
+  font-family: 'Arvo', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.info-script {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.4rem;
+  color: #888;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.info-desc {
+  font-size: 1.15rem;
+  color: #444;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.info-btn {
+  background: #444;
+  color: #fff;
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0;
+  padding: 14px 36px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background 0.2s;
+}
+.info-btn:hover {
+  background: #222;
+}
+
+.info-images {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: stretch;
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: center;
+}
+
+.info-img {
+  border-radius: 0;
+  object-fit: contain;
+  box-shadow: none;
+  background: #fff;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.main-img, .side-img {
+  width: 340px;
+  height: 480px;
+  object-fit: cover;
+}
+
+@media (max-width: 1100px) {
+  .info-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    max-width: 100%;
+  }
+  .info-images {
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+  }
+  .main-img, .side-img {
+    width: 220px;
+    height: 320px;
+  }
+}
+
+@media (max-width: 700px) {
+  .info-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0 8px;
+  }
+  .info-card {
+    padding: 32px 8px;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .info-images {
+    display: none;
+  }
+  .main-img, .side-img {
+    width: 90vw;
+    max-width: 320px;
+    height: auto;
+  }
+}
