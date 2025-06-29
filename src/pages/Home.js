@@ -7,6 +7,7 @@ import SearchBar from '../components/SearchBar';
 import buzzfeedLogo from '../assets/images/buzzfeed.svg';
 import LogoSection from '../components/LogoSection';
 import InfoSection from '../components/InfoSection';
+import SignupSection from '../components/SignupSection';
 
 const Home = () => {
   return (
@@ -33,6 +34,7 @@ const Home = () => {
       </div>
       <LogoSection />
       <InfoSection />
+      <SignupSection />
       {/* <img src={buzzfeedLogo} alt="Buzzfeed" className="buzzfeed-logo" /> */}
     </>
   );
