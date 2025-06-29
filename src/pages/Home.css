@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
+body, .home-root-bg {
+  background: #fff !important;
+}
+
 .home-banner-row {
   min-height: unset;
   background: var(--light-text-color);
