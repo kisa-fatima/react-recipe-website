@@ -10,6 +10,7 @@ const RecipePage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (id) {
       setLoading(true);
       fetchRecipeById(id).then(data => {
@@ -45,7 +46,9 @@ const RecipePage = () => {
           ))}
         </span>
       </div>
-      <div className="recipe-page-rating-value-centered">{safeRating.toFixed(1)}/5</div>
+      <div className="recipe-page-rating-value-centered">
+        {recipe.reviewCount ? `${recipe.reviewCount} REVIEWS / ${safeRating.toFixed(1)} AVERAGE` : `${safeRating.toFixed(1)} AVERAGE`}
+      </div>
       <div className="recipe-page-details">
         <p><strong>
           {/* Cuisine Icon */}

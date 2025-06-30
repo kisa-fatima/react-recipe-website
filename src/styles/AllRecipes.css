@@ -117,6 +117,23 @@
     min-width: 1.5rem;
     font-size: 1rem;
   }
+  .all-recipes-filters {
+    flex-direction: row;
+    gap: 0.7rem;
+    padding: 0.7rem 0.5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .all-recipes-filters .ant-select,
+  .all-recipes-filters .ant-btn {
+    min-width: 120px;
+    flex: 0 0 auto;
+  }
+  .all-recipes-filter-label {
+    flex: 0 0 auto;
+  }
 }
 .all-recipes-filters {
   border-radius: 10px;
@@ -133,19 +150,6 @@
   font-family: 'Arvo', serif;
   font-size: 1.05rem;
   min-width: 140px;
-}
-@media (max-width: 700px) {
-  .all-recipes-filters {
-    flex-direction: column;
-    gap: 0.7rem;
-    padding: 0.7rem 0.5rem;
-    align-items: center;
-    justify-content: center;
-  }
-  .all-recipes-filters .ant-select,
-  .all-recipes-filters .ant-btn {
-    min-width: 100%;
-  }
 }
 .all-recipes-filter-label {
   font-family: 'Arvo', serif;

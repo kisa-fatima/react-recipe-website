@@ -39,7 +39,7 @@ const Header = () => {
         <Row align="middle" justify="space-between" style={{ width: '100%' }}>
           <Col flex="none">
             <div className="logo">
-              <span className="logo-main">pinch</span><span className="logo-of">of &nbsp;</span><span className="logo-main">yum</span>
+              <span className="logo-main">pinch</span><span className="logo-of">of</span><span className="logo-main">yum</span>
             </div>
           </Col>
           <Col flex="auto">

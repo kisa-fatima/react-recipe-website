@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/RecipeCard.css';
 
-const RecipeCard = ({ image, label, rating, onClick }) => {
+const RecipeCard = ({ image, label, rating, reviewCount, onClick }) => {
   // Ensure rating is a valid number between 0 and 5
   let safeRating = Number(rating);
   if (isNaN(safeRating) || safeRating < 0) safeRating = 0;
@@ -25,7 +25,9 @@ const RecipeCard = ({ image, label, rating, onClick }) => {
           <span key={i + fullStars + 1} className="star empty">☆</span>
         ))}
       </div>
-      <div className="recipe-card-rating-value">{safeRating.toFixed(1)}</div>
+      <div className="recipe-card-reviews">
+        {reviewCount ? `${reviewCount} REVIEWS / ${safeRating.toFixed(1)} AVERAGE` : `${safeRating.toFixed(1)} AVERAGE`}
+      </div>
       <div className="recipe-card-label">{label}</div>
     </div>
   );
