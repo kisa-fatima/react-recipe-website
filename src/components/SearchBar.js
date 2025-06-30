@@ -1,7 +1,9 @@
 import React from 'react';
 import '../styles/SearchBar.css';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
+  const navigate = useNavigate();
   return (
     <div className="searchbar-container">
       <div className="searchbar-input-wrapper">
@@ -11,7 +13,7 @@ const SearchBar = () => {
         <input className="searchbar-input" type="text" placeholder="Search our recipes" />
       </div>
       <span className="searchbar-or">or</span>
-      <button className="searchbar-viewall">+ VIEW ALL RECIPES</button>
+      <button className="searchbar-viewall" onClick={() => navigate('/all-recipes')}>+ VIEW ALL RECIPES</button>
     </div>
   );
 };

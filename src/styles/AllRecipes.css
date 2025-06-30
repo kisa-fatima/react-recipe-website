@@ -1,0 +1,119 @@
+.all-recipes-page {
+  width: 100%;
+  padding: 2.5rem 0 1.5rem 0;
+  background: #faf9f6;
+  min-height: 80vh;
+}
+.all-recipes-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-align: center;
+  font-size: 2.2rem;
+  font-family: Domaine Display, Georgia, Cambria, Times New Roman, Times, serif;
+  font-weight: bold;
+  margin-bottom: 2.2rem;
+  color: var(--primary-color);
+}
+.all-recipes-loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #7c4d99;
+  margin-top: 2rem;
+}
+.all-recipes-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.2rem;
+  justify-content: center;
+}
+.all-recipes-pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.all-recipes-pagination-label {
+  font-family: 'Arvo', serif;
+  font-size: 1.1rem;
+  color: #444;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+.all-recipes-pagination-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.all-recipes-page-btn {
+  background: #f5f5f5;
+  color: #444;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  font-family: 'Arvo', serif;
+  font-weight: bold;
+  border-radius: 2px;
+  cursor: pointer;
+  margin: 0 0.2rem;
+  transition: background 0.2s, color 0.2s;
+}
+.all-recipes-page-btn.selected {
+  background: var(--primary-color);
+  color: #fff;
+}
+.all-recipes-ellipsis {
+  display: inline-block;
+  min-width: 2.2rem;
+  text-align: center;
+  color: #888;
+  font-size: 1.1rem;
+  font-family: 'Arvo', serif;
+  font-weight: bold;
+  margin: 0 0.2rem;
+}
+.all-recipes-page-num {
+  font-size: 1.1rem;
+  font-family: 'Arvo', serif;
+  color: #784062;
+  font-weight: bold;
+}
+@media (max-width: 900px) {
+  .all-recipes-cards {
+    gap: 1.2rem;
+  }
+}
+@media (max-width: 700px) {
+  .all-recipes-page {
+    padding: 1.2rem 0.2rem 0.7rem 0.2rem;
+  }
+  .all-recipes-title {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+  }
+  .all-recipes-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+  .all-recipes-pagination {
+    gap: 0.3rem;
+    margin-top: 1.2rem;
+  }
+  .all-recipes-pagination-row {
+    gap: 0.1rem;
+  }
+  .all-recipes-page-btn {
+    padding: 0.5rem 0.7rem;
+    font-size: 1rem;
+  }
+  .all-recipes-ellipsis {
+    min-width: 1.5rem;
+    font-size: 1rem;
+  }
+}
