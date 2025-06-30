@@ -9,6 +9,7 @@ import LogoSection from '../components/LogoSection';
 import InfoSection from '../components/InfoSection';
 import SignupSection from '../components/SignupSection';
 import RecipeCard from '../components/RecipeCard';
+import SelectSection from '../components/SelectSection';
 
 const Home = () => {
   return (
@@ -36,6 +37,7 @@ const Home = () => {
       <LogoSection />
       <InfoSection />
       <SignupSection />
+      <SelectSection />
     
     </>
   );

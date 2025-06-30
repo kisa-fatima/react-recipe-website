@@ -92,3 +92,19 @@ export const fetchCusineDetails = async (cuisine) => {
     return null;
   }
 }
+
+/**
+ * Filter recipes by meal type.
+ * @param {string} mealType - Meal type (e.g., "breakfast", "lunch", "dinner")
+ * @returns {Promise<Object[]>} - Array of recipe objects.
+ */
+export const filterRecipesByMealType = async (mealType) => {
+  try {
+    const response = await fetch(`${BASE_URL}/meal-type/${mealType.toLowerCase()}`);
+    const data = await response.json();
+    return data.recipes || []; // in case the response is empty
+  } catch (error) {
+    console.error(`Error filtering recipes by meal type "${mealType}":`, error);
+    return [];
+  }
+};

@@ -1,0 +1,98 @@
+.recipe-card {
+  background: #faf9f6;
+  /* border-radius: 12px; */
+  /* box-shadow: 0 2px 12px rgba(0,0,0,0.07); */
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 1.2rem 0;
+  transition: box-shadow 0.2s;
+}
+.recipe-card:hover {
+  /* box-shadow: 0 4px 18px rgba(0,0,0,0.13); */
+}
+.recipe-card-img-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+.recipe-card-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  /* border-radius: 10px; */
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+.recipe-card-rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.7rem 0 0.2rem 0;
+  font-size: 1.3rem;
+}
+.star {
+  margin: 0 2px;
+  font-size: 1.3rem;
+  color: #e0e0e0;
+}
+.star.full {
+  color: #f7b731;
+}
+.star.half {
+  color: #f7b731;
+  opacity: 0.6;
+}
+.star.empty {
+  color: #e0e0e0;
+}
+.recipe-card-reviews {
+  text-align: center;
+  font-family: 'Arvo', serif;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #444;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.review-count, .review-average {
+  font-weight: bold;
+}
+.review-divider {
+  color: #888;
+  font-weight: normal;
+}
+.recipe-card-label {
+    font-family: Domaine Display, Georgia, Cambria, Times New Roman, Times, serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+.recipe-card-rating-value {
+  text-align: center;
+  color: #888;
+  font-size: 1.05rem;
+  font-family: 'Arvo', serif;
+  margin-bottom: 0.4rem;
+  margin-top: 0.1rem;
+  font-weight: 500;
+}
+@media (max-width: 700px) {
+  .recipe-card {
+    width: 90vw;
+    max-width: 350px;
+    padding: 0 0 1.2rem 0;
+  }
+  .recipe-card-img {
+    height: 120px;
+  }
+}
