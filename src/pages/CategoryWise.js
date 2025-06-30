@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { filterRecipesByCuisine } from '../services/recipeApi';
 import RecipeCard from '../components/RecipeCard';
 import '../styles/CategoryWise.css';
@@ -8,6 +8,7 @@ const CategoryWise = () => {
   const { category } = useParams();
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -32,6 +33,7 @@ const CategoryWise = () => {
               image={recipe.image}
               label={recipe.name}
               rating={recipe.rating}
+              onClick={() => navigate(`/recipe/${recipe.id}`)}
             />
           ))}
         </div>

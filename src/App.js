@@ -7,6 +7,7 @@ import About from "./pages/About";
 import StartHere from "./pages/StartHere";
 import CategoryWise from "./pages/CategoryWise";
 import AllRecipes from "./pages/AllRecipes";
+import RecipePage from "./pages/RecipePage";
 import "./styles/global.css";
 import Footer from "./components/Footer";
 
@@ -23,6 +24,7 @@ export default function App() {
             <Route path="/start-here" element={<StartHere />} />
             <Route path="/category/:category" element={<CategoryWise />} />
             <Route path="/all-recipes" element={<AllRecipes />} />
+            <Route path="/recipe/:id" element={<RecipePage />} />
           </Routes>
         </Layout.Content>
       </Layout>

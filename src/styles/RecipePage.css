@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+.recipe-page-container {
+  max-width: 800px;
+  margin: 1rem auto 2rem auto;
+  background: #faf9f6;
+  border-radius: 0;
+  box-shadow: 0 4px 24px rgba(120, 64, 98, 0.07);
+  padding: 1rem 2.2rem 2.2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recipe-page-title {
+  font-family: 'Domaine Display', Georgia, Cambria, Times New Roman, Times, serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 1.8rem;
+  text-align: center;
+}
+
+.recipe-page-image {
+  width: 100%;
+  max-width: 420px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: 0 2px 12px rgba(120, 64, 98, 0.09);
+  margin-bottom: 2rem;
+}
+
+.recipe-page-details {
+  width: 100%;
+  font-family: 'Arvo', serif;
+  color: var(--dark-text-color);
+  font-size: 1.13rem;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: 0 1px 6px rgba(120, 64, 98, 0.06);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.recipe-page-details p {
+  margin: 0.7rem 0 0.7rem 0;
+  font-size: 1.1rem;
+}
+
+.recipe-page-details strong {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.recipe-page-details ul,
+.recipe-page-details ol {
+  margin: 0.5rem 0 1.2rem 1.5rem;
+  padding-left: 1.2rem;
+  font-size: 1.08rem;
+}
+
+.recipe-page-details li {
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+
+.recipe-page-loading,
+.recipe-page-error {
+  text-align: center;
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-top: 2.5rem;
+}
+
+.recipe-page-rating-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  margin-top: -1.8rem;
+}
+
+.recipe-page-rating-value-centered {
+  text-align: center;
+  font-family: 'Arvo', serif;
+  color: #888;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  margin-top: -0.5rem;
+}
+
+.recipe-page-rating-row .star {
+  font-size: 2.1rem;
+  margin: 0 2px;
+}
+
+@media (max-width: 900px) {
+  .recipe-page-container {
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+  }
+  .recipe-page-image {
+    max-width: 100%;
+    height: 180px;
+  }
+  .recipe-page-title {
+    font-size: 2rem;
+  }
+  .recipe-page-details {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    font-size: 1rem;
+  }
+}
