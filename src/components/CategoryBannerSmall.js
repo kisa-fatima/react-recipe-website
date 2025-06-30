@@ -3,6 +3,7 @@ import { fetchRecipeCusineTypes } from '../services/recipeApi';
 import CircleCard from './CircleCard';
 import Slider from 'react-slick';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './CategoryBannerSmall.css';
@@ -31,6 +32,7 @@ function useIsMobile(breakpoint = 700) {
 const CategoryBannerSmall = () => {
   const [categories, setCategories] = useState([]);
   const isMobile = useIsMobile(700);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -39,6 +41,10 @@ const CategoryBannerSmall = () => {
     };
     getCategories();
   }, []);
+
+  const handleClick = (cat) => {
+    navigate(`/category/${encodeURIComponent(cat.name)}`);
+  };
 
   const settings = {
     dots: false,
@@ -76,13 +82,17 @@ const CategoryBannerSmall = () => {
       {isMobile ? (
         <div className="category-banner-small-scroll-row">
           {categories.map((cat) => (
-            <CircleCard key={cat.name} image={cat.image} label={cat.name} />
+            <div key={cat.name} onClick={() => handleClick(cat)} style={{ cursor: 'pointer' }}>
+              <CircleCard image={cat.image} label={cat.name} />
+            </div>
           ))}
         </div>
       ) : (
         <Slider {...settings} className="category-banner-small-slider">
           {categories.map((cat) => (
-            <CircleCard key={cat.name} image={cat.image} label={cat.name} />
+            <div key={cat.name} onClick={() => handleClick(cat)} style={{ cursor: 'pointer' }}>
+              <CircleCard image={cat.image} label={cat.name} />
+            </div>
           ))}
         </Slider>
       )}
