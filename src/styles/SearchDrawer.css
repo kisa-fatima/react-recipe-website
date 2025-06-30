@@ -45,6 +45,36 @@
   margin-bottom: 1.2rem;
 }
 
+.search-drawer .ant-input:focus,
+.search-drawer .ant-input-focused,
+.search-drawer .ant-input-affix-wrapper-focused,
+.search-drawer .ant-input-affix-wrapper:hover,
+.search-drawer-input.ant-input:focus,
+.search-drawer-input.ant-input-focused,
+.search-drawer-input.ant-input:hover {
+  border-color: var(--secondary-color) !important;
+  box-shadow: 0 0 0 2px rgba(237, 182, 84, 0.18) !important;
+}
+
+.search-drawer .ant-btn,
+.search-drawer .ant-btn-default,
+.search-drawer .ant-btn-primary {
+  border-color: var(--secondary-color) !important;
+}
+.search-drawer .ant-btn:focus,
+.search-drawer .ant-btn:hover,
+.search-drawer .ant-btn:active,
+.search-drawer .ant-btn-default:focus,
+.search-drawer .ant-btn-default:hover,
+.search-drawer .ant-btn-default:active,
+.search-drawer .ant-btn-primary:focus,
+.search-drawer .ant-btn-primary:hover,
+.search-drawer .ant-btn-primary:active {
+  border-color: var(--secondary-color) !important;
+  box-shadow: 0 0 0 2px rgba(237, 182, 84, 0.18) !important;
+  color: var(--secondary-color) !important;
+}
+
 .search-drawer-loading {
   text-align: center;
   margin-top: 2rem;
