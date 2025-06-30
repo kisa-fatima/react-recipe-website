@@ -1,5 +1,5 @@
 import React from 'react';
-import './CircleCard.css';
+import '../styles/CircleCard.css';
 
 const CircleCard = ({ image, label }) => (
   <div className="circle-card">
