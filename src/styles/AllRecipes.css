@@ -1,6 +1,6 @@
 .all-recipes-page {
   width: 100%;
-  padding: 2.5rem 0 1.5rem 0;
+  padding: 1rem 0 1.5rem 0;
   background: #faf9f6;
   min-height: 80vh;
 }
@@ -13,7 +13,8 @@
   font-size: 2.2rem;
   font-family: Domaine Display, Georgia, Cambria, Times New Roman, Times, serif;
   font-weight: bold;
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.5rem;
+  
   color: var(--primary-color);
 }
 .all-recipes-loading {
@@ -118,7 +119,6 @@
   }
 }
 .all-recipes-filters {
-
   border-radius: 10px;
   padding: 1.2rem 1.5rem;
   margin-bottom: 2.2rem;
@@ -160,4 +160,22 @@
   font-size: 1.2rem;
   font-family: 'Arvo', serif;
   margin: 2.5rem 0 2rem 0;
+}
+.all-recipes-filters .ant-btn,
+.all-recipes-filters .ant-btn-default,
+.all-recipes-filters .ant-btn-primary {
+  border-color: var(--secondary-color) !important;
+}
+.all-recipes-filters .ant-btn:hover,
+.all-recipes-filters .ant-btn-default:hover,
+.all-recipes-filters .ant-btn-primary:hover {
+  border-color: var(--secondary-color) !important;
+  box-shadow: 0 0 0 2px rgba(237, 182, 84, 0.18) !important;
+  color: var(--secondary-color) !important;
+}
+.all-recipes-filters .ant-select-focused .ant-select-selector,
+.all-recipes-filters .ant-select-selector:focus,
+.all-recipes-filters .ant-select-selector:hover {
+  border-color: var(--secondary-color) !important;
+  box-shadow: 0 0 0 2px rgba(237, 182, 84, 0.18) !important;
 }
