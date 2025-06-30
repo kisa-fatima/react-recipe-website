@@ -55,6 +55,7 @@ const SearchDrawer = ({ open, onClose }) => {
                     image={recipe.image}
                     label={recipe.name}
                     rating={recipe.rating}
+                    reviewCount={recipe.reviewCount}
                     onClick={() => { window.location.href = `/recipe/${recipe.id}`; onClose(); }}
                   />
                 </div>

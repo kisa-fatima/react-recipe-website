@@ -60,11 +60,12 @@ const AllRecipes = () => {
   }, [mealType, cuisine, sort]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     // Fetch total count if available from API
     fetch('https://dummyjson.com/recipes').then(res => res.json()).then(data => {
       setTotal(data.total || 0);
     });
-  }, []);
+  }, [page]);
 
   // Pagination for filtered recipes
   const paginatedRecipes = filteredRecipes.slice((page - 1) * RECIPES_PER_PAGE, page * RECIPES_PER_PAGE);
@@ -121,6 +122,7 @@ const AllRecipes = () => {
                   image={recipe.image}
                   label={recipe.name}
                   rating={recipe.rating}
+                  reviewCount={recipe.reviewCount}
                   onClick={() => navigate(`/recipe/${recipe.id}`)}
                 />
               ))}

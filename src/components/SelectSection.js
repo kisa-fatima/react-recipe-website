@@ -47,6 +47,7 @@ const SelectSection = () => {
               image={recipe.image}
               label={recipe.name}
               rating={recipe.rating}
+              reviewCount={recipe.reviewCount}
               onClick={() => navigate(`/recipe/${recipe.id}`)}
             />
           ))

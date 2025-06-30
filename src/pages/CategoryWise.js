@@ -11,6 +11,7 @@ const CategoryWise = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setLoading(true);
     filterRecipesByCuisine(category).then(data => {
       setRecipes(data);
@@ -33,6 +34,7 @@ const CategoryWise = () => {
               image={recipe.image}
               label={recipe.name}
               rating={recipe.rating}
+              reviewCount={recipe.reviewCount}
               onClick={() => navigate(`/recipe/${recipe.id}`)}
             />
           ))}

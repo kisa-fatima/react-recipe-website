@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Card } from 'antd';
 import '../styles/Home.css';
 import CategoryBannerBig from '../components/CategoryBannerBig';
@@ -12,6 +12,7 @@ import RecipeCard from '../components/RecipeCard';
 import SelectSection from '../components/SelectSection';
 
 const Home = () => {
+  useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <>
       
