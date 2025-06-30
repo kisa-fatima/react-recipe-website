@@ -3,6 +3,7 @@ import { fetchAllRecipes } from '../services/recipeApi';
 import RecipeCard from '../components/RecipeCard';
 import '../styles/AllRecipes.css';
 import { ScheduleOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 const RECIPES_PER_PAGE = 12;
 
@@ -11,6 +12,7 @@ const AllRecipes = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -62,6 +64,7 @@ const AllRecipes = () => {
                 image={recipe.image}
                 label={recipe.name}
                 rating={recipe.rating}
+                onClick={() => navigate(`/recipe/${recipe.id}`)}
               />
             ))}
           </div>

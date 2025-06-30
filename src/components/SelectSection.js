@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { filterRecipesByMealType } from '../services/recipeApi';
 import RecipeCard from './RecipeCard';
 import '../styles/SelectSection.css';
+import { useNavigate } from 'react-router-dom';
 
 const MEAL_TYPES = [
   { label: 'BREAKFAST', value: 'breakfast' },
@@ -13,6 +14,7 @@ const SelectSection = () => {
   const [selectedMeal, setSelectedMeal] = useState('breakfast');
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -45,6 +47,7 @@ const SelectSection = () => {
               image={recipe.image}
               label={recipe.name}
               rating={recipe.rating}
+              onClick={() => navigate(`/recipe/${recipe.id}`)}
             />
           ))
         )}

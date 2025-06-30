@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/RecipeCard.css';
 
-const RecipeCard = ({ image, label, rating }) => {
+const RecipeCard = ({ image, label, rating, onClick }) => {
   // Ensure rating is a valid number between 0 and 5
   let safeRating = Number(rating);
   if (isNaN(safeRating) || safeRating < 0) safeRating = 0;
@@ -12,7 +12,7 @@ const RecipeCard = ({ image, label, rating }) => {
   const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
   return (
-    <div className="recipe-card">
+    <div className="recipe-card" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
       <div className="recipe-card-img-wrapper">
         <img src={image} alt={label} className="recipe-card-img" />
       </div>
