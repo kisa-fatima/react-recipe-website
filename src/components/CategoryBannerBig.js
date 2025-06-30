@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { fetchRecipeCusineTypes } from '../services/recipeApi';
 import RecipeCardLong from './RecipeCardLong';
 import './CategoryBannerBig.css';
+import { useNavigate } from 'react-router-dom';
 
 const CategoryBannerBig = () => {
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -14,10 +16,16 @@ const CategoryBannerBig = () => {
     getCategories();
   }, []);
 
+  const handleClick = (cat) => {
+    navigate(`/category/${encodeURIComponent(cat.name)}`);
+  };
+
   return (
     <div className="category-banner-big">
       {categories.map((cat, idx) => (
-        <RecipeCardLong key={cat.name} image={cat.image} label={cat.name.toUpperCase()} />
+        <div key={cat.name} onClick={() => handleClick(cat)} style={{ cursor: 'pointer' }}>
+          <RecipeCardLong image={cat.image} label={cat.name.toUpperCase()} />
+        </div>
       ))}
     </div>
   );
