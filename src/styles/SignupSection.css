@@ -157,3 +157,52 @@
     font-size: 1rem;
   }
 }
+
+@media (max-width: 700px) {
+  .signup-section-inner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.2rem 0.5rem;
+  }
+  .signup-social {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  .signup-social-label {
+    margin-bottom: 0.7rem;
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+  .signup-social-icons {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 1.2rem;
+    font-size: 2.2rem;
+    margin-bottom: 0.7rem;
+  }
+  .signup-form-block {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .signup-form-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  .signup-input {
+    width: 100%;
+    min-width: 0;
+  }
+  .signup-btn {
+    width: 100%;
+    padding: 0.7rem 0;
+    font-size: 1rem;
+  }
+}
