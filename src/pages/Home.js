@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Card } from 'antd';
-import './Home.css';
+import '../styles/Home.css';
 import CategoryBannerBig from '../components/CategoryBannerBig';
 import CategoryBannerSmall from '../components/CategoryBannerSmall';
 import SearchBar from '../components/SearchBar';

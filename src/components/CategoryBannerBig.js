@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchRecipeCusineTypes } from '../services/recipeApi';
 import RecipeCardLong from './RecipeCardLong';
-import './CategoryBannerBig.css';
+import '../styles/CategoryBannerBig.css';
 import { useNavigate } from 'react-router-dom';
 
 const CategoryBannerBig = () => {

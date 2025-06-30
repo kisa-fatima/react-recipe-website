@@ -6,7 +6,7 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './CategoryBannerSmall.css';
+import '../styles/CategoryBannerSmall.css';
 
 const ArrowLeft = (props) => (
   <button {...props} className="custom-slick-arrow custom-slick-prev" aria-label="Previous">
