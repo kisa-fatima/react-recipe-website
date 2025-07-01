@@ -3,17 +3,19 @@ import { fetchAllRecipes, filterRecipesByMealType, filterRecipesByCuisine, fetch
 import RecipeCard from '../components/RecipeCard';
 import '../styles/AllRecipes.css';
 import { ScheduleOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Select, Button } from 'antd';
 
 const RECIPES_PER_PAGE = 12;
 
+const getQueryParam = (search, key, fallback) => {
+  const params = new URLSearchParams(search);
+  return params.get(key) || fallback;
+};
+
 const AllRecipes = () => {
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(() => Number(localStorage.getItem('allRecipes_page')) || 1);
-  const [total, setTotal] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const mealTypes = [
     { label: 'All', value: '' },
@@ -22,11 +24,26 @@ const AllRecipes = () => {
     { label: 'Dinner', value: 'dinner' },
   ];
 
-  const [mealType, setMealType] = useState(() => localStorage.getItem('allRecipes_mealType') || '');
-  const [cuisine, setCuisine] = useState(() => localStorage.getItem('allRecipes_cuisine') || 'All');
+  // Read from URL query params
+  const [mealType, setMealType] = useState(() => getQueryParam(location.search, 'mealType', ''));
+  const [cuisine, setCuisine] = useState(() => getQueryParam(location.search, 'cuisine', 'All'));
+  const [sort, setSort] = useState(() => getQueryParam(location.search, 'sort', ''));
+  const [page, setPage] = useState(() => Number(getQueryParam(location.search, 'page', 1)));
   const [cuisineOptions, setCuisineOptions] = useState([]);
-  const [sort, setSort] = useState(() => localStorage.getItem('allRecipes_sort') || '');
   const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState(0);
+
+  // Update URL when filters change
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (mealType) params.set('mealType', mealType);
+    if (cuisine) params.set('cuisine', cuisine);
+    if (sort) params.set('sort', sort);
+    if (page > 1) params.set('page', page);
+    navigate({ search: params.toString() }, { replace: true });
+    // eslint-disable-next-line
+  }, [mealType, cuisine, sort, page]);
 
   useEffect(() => {
     fetchRecipeCusineTypes().then(data => {
@@ -50,9 +67,17 @@ const AllRecipes = () => {
       filtered = filtered.slice().sort((a, b) => a.rating - b.rating);
     }
     setFilteredRecipes(filtered);
-    setPage(1);
     setLoading(false);
   };
+
+  // Sync state with URL on mount or when location.search changes (e.g., browser navigation)
+  useEffect(() => {
+    setMealType(getQueryParam(location.search, 'mealType', ''));
+    setCuisine(getQueryParam(location.search, 'cuisine', 'All'));
+    setSort(getQueryParam(location.search, 'sort', ''));
+    setPage(Number(getQueryParam(location.search, 'page', 1)));
+    // eslint-disable-next-line
+  }, [location.search]);
 
   useEffect(() => {
     handleFilter();
@@ -61,26 +86,9 @@ const AllRecipes = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Fetch total count if available from API
     fetch('https://dummyjson.com/recipes').then(res => res.json()).then(data => {
       setTotal(data.total || 0);
     });
-  }, [page]);
-
-  useEffect(() => {
-    localStorage.setItem('allRecipes_mealType', mealType);
-  }, [mealType]);
-
-  useEffect(() => {
-    localStorage.setItem('allRecipes_cuisine', cuisine);
-  }, [cuisine]);
-
-  useEffect(() => {
-    localStorage.setItem('allRecipes_sort', sort);
-  }, [sort]);
-
-  useEffect(() => {
-    localStorage.setItem('allRecipes_page', page);
   }, [page]);
 
   // Pagination for filtered recipes
