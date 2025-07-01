@@ -1,0 +1,23 @@
+.admin-panel-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(120, 64, 98, 0.08);
+  text-align: center;
+}
+
+.admin-panel-title {
+  color: var(--primary-color);
+  font-size: 2.2rem;
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.admin-panel-desc {
+  color: #444;
+  font-size: 1.15rem;
+  margin-bottom: 0;
+} 

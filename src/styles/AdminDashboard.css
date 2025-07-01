@@ -1,0 +1,93 @@
+.admin-dashboard {
+  padding: 10px 16px;
+}
+
+.admin-dashboard-title {
+  color: var(--primary-color);
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+}
+
+.admin-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+  align-items: stretch;
+}
+.grid-item {
+  min-width: 0;
+}
+.grid-item-1-1 { grid-row: 1; grid-column: 1; }
+.grid-item-1-2 { grid-row: 1; grid-column: 2; }
+.grid-item-2-1 { grid-row: 2; grid-column: 1; }
+.grid-item-2-2 { grid-row: 2; grid-column: 2; }
+
+.admin-dashboard-widget {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(120, 64, 98, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  min-width: 100px;
+  min-height: 60px;
+  gap: 12px;
+  flex: 1 1 100px;
+  transition: box-shadow 0.2s;
+}
+.admin-dashboard-widget:hover {
+  box-shadow: 0 4px 16px rgba(120, 64, 98, 0.13);
+}
+.widget-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(120, 64, 98, 0.08);
+}
+.widget-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.widget-label {
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 2px;
+  font-weight: 500;
+}
+.widget-value {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.admin-dashboard .cusines-chart-container {
+  padding: 12px 10px 8px 10px;
+  margin: 0;
+  max-width: 100%;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+.cusines-chart-title {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 900px) {
+  .admin-dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+  .grid-item-1-1 { grid-row: 1; grid-column: 1; }
+  .grid-item-1-2 { grid-row: 2; grid-column: 1; }
+  .grid-item-2-1 { grid-row: 3; grid-column: 1; }
+  .grid-item-2-2 { grid-row: 4; grid-column: 1; }
+}

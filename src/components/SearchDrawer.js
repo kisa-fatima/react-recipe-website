@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Drawer, Input, Spin } from 'antd';
+import { Drawer, Input } from 'antd';
 import RecipeCard from './RecipeCard';
 import { searchRecipes } from '../services/recipeApi';
 import '../styles/SearchDrawer.css';
+import Loader from './Loader';
 
 const SearchDrawer = ({ open, onClose }) => {
   const [query, setQuery] = useState('');
@@ -45,7 +46,7 @@ const SearchDrawer = ({ open, onClose }) => {
       />
       <div className="search-drawer-results">
         {loading ? (
-          <div className="search-drawer-loading"><Spin /></div>
+          <div className="search-drawer-loading"><Loader text="Searching..." /></div>
         ) : (
           results.length > 0 ? (
             <div className="search-drawer-cards-grid">

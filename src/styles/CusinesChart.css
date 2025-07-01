@@ -1,0 +1,26 @@
+.cusines-chart-container {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(120, 64, 98, 0.08);
+  padding: 24px 32px 16px 32px;
+  margin: 32px 0 0 0;
+  max-width: 600px;
+}
+.cusines-chart-title {
+  color: var(--primary-color);
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+@media (max-width: 700px) {
+  .cusines-chart-container {
+    padding: 16px 8px 8px 8px;
+    max-width: 100%;
+  }
+  .cusines-chart-title {
+    font-size: 1.1rem;
+  }
+}
