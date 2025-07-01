@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchRecipeById } from '../services/recipeApi';
 import '../styles/RecipePage.css';
 import { FaBowlFood } from 'react-icons/fa6';
+import Loader from '../components/Loader';
 
 const RecipePage = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const RecipePage = () => {
     }
   }, [id]);
 
-  if (loading) return <div className="recipe-page-loading">Loading...</div>;
+  if (loading) return <Loader />;
   if (!recipe) return <div className="recipe-page-error">Recipe not found.</div>;
 
   // Ensure rating is a valid number between 0 and 5

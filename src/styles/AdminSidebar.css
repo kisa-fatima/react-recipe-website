@@ -1,0 +1,64 @@
+.admin-sidebar {
+  width: 160px;
+  background: var(--primary-color);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 8px rgba(120, 64, 98, 0.1);
+}
+
+.admin-sidebar-header {
+  padding: 16px 10px 10px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-sidebar-title {
+  color: #fff;
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.admin-sidebar-menu {
+  background: var(--primary-color) !important;
+  border: none !important;
+  flex: 1;
+  padding: 8px 0;
+}
+
+.admin-sidebar-menu .ant-menu-item {
+  height: 38px !important;
+  line-height: 38px !important;
+  margin: 2px 6px !important;
+  border-radius: 6px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  transition: all 0.3s ease !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+
+.admin-sidebar-menu .ant-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+.admin-sidebar-menu .ant-menu-item-selected {
+  background: var(--secondary-color, #ff7f50) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+.admin-sidebar-menu .ant-menu-item-selected:hover {
+  background: var(--secondary-color, #ff7f50) !important;
+  color: #fff !important;
+}
+
+.admin-sidebar-menu .ant-menu-item .anticon {
+  margin-right: 8px !important;
+  font-size: 16px !important;
+} 

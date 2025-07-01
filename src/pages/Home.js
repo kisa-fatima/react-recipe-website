@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Card } from 'antd';
 import '../styles/Home.css';
 import CategoryBannerBig from '../components/CategoryBannerBig';
@@ -10,9 +10,16 @@ import InfoSection from '../components/InfoSection';
 import SignupSection from '../components/SignupSection';
 import RecipeCard from '../components/RecipeCard';
 import SelectSection from '../components/SelectSection';
+import Loader from '../components/Loader';
 
 const Home = () => {
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const timer = setTimeout(() => setLoading(false), 600);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) return <Loader />;
   return (
     <>
       

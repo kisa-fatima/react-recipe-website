@@ -5,6 +5,7 @@ import '../styles/AllRecipes.css';
 import { ScheduleOutlined } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select, Button } from 'antd';
+import Loader from '../components/Loader';
 
 const RECIPES_PER_PAGE = 12;
 
@@ -67,7 +68,7 @@ const AllRecipes = () => {
       filtered = filtered.slice().sort((a, b) => a.rating - b.rating);
     }
     setFilteredRecipes(filtered);
-    setLoading(false);
+      setLoading(false);
   };
 
   // Sync state with URL on mount or when location.search changes (e.g., browser navigation)
@@ -133,30 +134,30 @@ const AllRecipes = () => {
         <Button onClick={() => { setMealType(''); setCuisine('All'); setSort(''); setPage(1); }}>Reset</Button>
       </div>
       {loading ? (
-        <div className="all-recipes-loading">Loading...</div>
+        <Loader />
       ) : (
         <>
           {filteredRecipes.length === 0 ? (
             <div className="all-recipes-empty">No recipes found for the selected filters.</div>
           ) : (
-            <div className="all-recipes-cards">
+          <div className="all-recipes-cards">
               {paginatedRecipes.map(recipe => (
-                <RecipeCard
-                  key={recipe.id}
-                  image={recipe.image}
-                  label={recipe.name}
-                  rating={recipe.rating}
+              <RecipeCard
+                key={recipe.id}
+                image={recipe.image}
+                label={recipe.name}
+                rating={recipe.rating}
                   reviewCount={recipe.reviewCount}
                   onClick={() => navigate(`/recipe/${recipe.id}`)}
-                />
-              ))}
-            </div>
+              />
+            ))}
+          </div>
           )}
           <div className="all-recipes-pagination">
             {totalPages > 1 && (
               <>
-                <div className="all-recipes-pagination-label">MORE RECIPES</div>
-                <div className="all-recipes-pagination-row">
+            <div className="all-recipes-pagination-label">MORE RECIPES</div>
+            <div className="all-recipes-pagination-row">
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map((btn) => (
                     <button
                       key={btn}
@@ -169,7 +170,7 @@ const AllRecipes = () => {
                   ))}
                 </div>
               </>
-            )}
+              )}
           </div>
         </>
       )}

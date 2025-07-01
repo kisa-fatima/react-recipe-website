@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { filterRecipesByCuisine } from '../services/recipeApi';
 import RecipeCard from '../components/RecipeCard';
 import '../styles/CategoryWise.css';
+import Loader from '../components/Loader';
 
 const CategoryWise = () => {
   const { category } = useParams();
@@ -23,7 +24,7 @@ const CategoryWise = () => {
     <div className="category-wise-page">
       <h2 className="category-wise-title">{category} Recipes</h2>
       {loading ? (
-        <div className="category-wise-loading">Loading...</div>
+        <Loader />
       ) : recipes.length === 0 ? (
         <div className="category-wise-empty">No recipes found for this category.</div>
       ) : (

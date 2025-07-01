@@ -1,0 +1,23 @@
+.cusines-piechart-container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(120, 64, 98, 0.08);
+  padding: 12px 10px 8px 10px;
+  margin: 0;
+  max-width: 100%;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.cusines-piechart-title {
+  color: var(--primary-color);
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  text-align: left;
+  letter-spacing: 0.5px;
+}

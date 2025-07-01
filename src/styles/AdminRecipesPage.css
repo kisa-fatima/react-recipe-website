@@ -1,0 +1,21 @@
+.admin-recipes-page {
+  padding: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin: 24px;
+}
+
+.admin-page-title {
+  color: var(--primary-color);
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.admin-page-desc {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+} 
