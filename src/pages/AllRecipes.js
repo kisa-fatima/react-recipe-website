@@ -11,7 +11,7 @@ const RECIPES_PER_PAGE = 12;
 const AllRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(() => Number(localStorage.getItem('allRecipes_page')) || 1);
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
 
@@ -22,10 +22,10 @@ const AllRecipes = () => {
     { label: 'Dinner', value: 'dinner' },
   ];
 
-  const [mealType, setMealType] = useState('');
-  const [cuisine, setCuisine] = useState('All');
+  const [mealType, setMealType] = useState(() => localStorage.getItem('allRecipes_mealType') || '');
+  const [cuisine, setCuisine] = useState(() => localStorage.getItem('allRecipes_cuisine') || 'All');
   const [cuisineOptions, setCuisineOptions] = useState([]);
-  const [sort, setSort] = useState('');
+  const [sort, setSort] = useState(() => localStorage.getItem('allRecipes_sort') || '');
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
   useEffect(() => {
@@ -65,6 +65,22 @@ const AllRecipes = () => {
     fetch('https://dummyjson.com/recipes').then(res => res.json()).then(data => {
       setTotal(data.total || 0);
     });
+  }, [page]);
+
+  useEffect(() => {
+    localStorage.setItem('allRecipes_mealType', mealType);
+  }, [mealType]);
+
+  useEffect(() => {
+    localStorage.setItem('allRecipes_cuisine', cuisine);
+  }, [cuisine]);
+
+  useEffect(() => {
+    localStorage.setItem('allRecipes_sort', sort);
+  }, [sort]);
+
+  useEffect(() => {
+    localStorage.setItem('allRecipes_page', page);
   }, [page]);
 
   // Pagination for filtered recipes
