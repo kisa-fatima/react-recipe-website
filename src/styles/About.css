@@ -1,0 +1,92 @@
+.about-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #f6f6f6;
+  min-height: 70vh;
+}
+
+.about-image-col {
+  flex: 1 1 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f6f6f6;
+  padding: 0;
+}
+
+.about-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+  object-fit: cover;
+  box-shadow: 0 2px 16px rgba(120, 64, 98, 0.07);
+}
+
+.about-text-col {
+  flex: 1 1 55%;
+  padding: 3rem 3rem 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-title {
+ font-family: Domaine Display, Georgia, Cambria, Times New Roman, Times, serif;
+  font-size: 3rem;
+  color: #784062;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+}
+
+.about-subtitle {
+  font-family: 'Arvo', serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.03em;
+}
+
+.about-bold {
+  font-family: 'Dancing Script', cursive, 'Pacifico', sans-serif !important;
+  font-size: 1.7rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  color:#444;
+  margin-left: 0.2rem;
+}
+
+.about-intro {
+  font-size: 1.1rem;
+  font-family: Domaine Display, Georgia, Cambria, Times New Roman, Times, serif;
+  margin-bottom: 1.2rem;
+  color: #444;
+}
+
+.about-desc {
+  font-size: 1.08rem;
+  color: #444;
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+ font-family: Domaine Display, Georgia, Cambria, Times New Roman, Times, serif;
+}
+
+
+@media (max-width: 900px) {
+  .about-container {
+    flex-direction: column;
+    padding: 0 0.5rem;
+  }
+  .about-image-col, .about-text-col {
+    flex: 1 1 100%;
+    padding: 1.2rem 0.5rem;
+  }
+  .about-title {
+    font-size: 2.1rem;
+  }
+  .about-subtitle, .about-bold {
+    font-size: 1.1rem;
+  }
+}
