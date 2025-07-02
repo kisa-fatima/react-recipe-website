@@ -12,6 +12,9 @@
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
+.admin-cusine-card {
+  min-height: 260px;
+}
 .admin-recipe-card:hover {
   box-shadow: 0 6px 24px rgba(120, 64, 98, 0.16);
   transform: translateY(-2px) scale(1.02);
@@ -121,5 +124,10 @@
   }
   .admin-recipe-card-img-wrapper {
     height: 110px;
+  }
+}
+@media (max-width: 700px) {
+  .admin-recipe-card-img-wrapper {
+    height: 200px;
   }
 }

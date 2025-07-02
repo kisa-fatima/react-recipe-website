@@ -9,7 +9,7 @@ const truncateLines = (text, maxLines = 2) => {
   return lines.slice(0, maxLines).join('\n') + '...';
 };
 
-const AdminRecipeCard = ({ image, label, cuisine, ingredients, instructions, onEdit, onDelete }) => {
+const AdminRecipeCard = ({ image, label, cuisine, mealType, difficulty, ingredients, instructions, onEdit, onDelete }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -23,6 +23,8 @@ const AdminRecipeCard = ({ image, label, cuisine, ingredients, instructions, onE
       </div>
       <div className="admin-recipe-card-label">{label}</div>
       <div className="admin-recipe-card-cuisine">Cuisine: <span>{cuisine}</span></div>
+      <div className="admin-recipe-card-cuisine">Meal Type: <span>{Array.isArray(mealType) ? mealType.join(', ') : mealType}</span></div>
+      <div className="admin-recipe-card-cuisine">Difficulty: <span>{difficulty}</span></div>
       <div className="admin-recipe-card-section">
         <div className="admin-recipe-card-section-title">Ingredients</div>
         <div className="admin-recipe-card-section-content">
