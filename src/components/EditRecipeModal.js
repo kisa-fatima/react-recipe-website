@@ -48,8 +48,8 @@ const EditRecipeModal = ({ open, onClose, recipe, onRecipeUpdated }) => {
           prepTimeMinutes: recipe.prepTimeMinutes || '',
           cookTimeMinutes: recipe.cookTimeMinutes || '',
           servings: recipe.servings || '',
-          difficulty: recipe.difficulty || '',
-          mealType: Array.isArray(recipe.mealType) ? (recipe.mealType[0] || '') : (recipe.mealType || ''),
+          difficulty: (recipe.difficulty || '').toLowerCase(),
+          mealType: Array.isArray(recipe.mealType) ? (recipe.mealType[0] ? recipe.mealType[0].toLowerCase() : '') : (recipe.mealType ? recipe.mealType.toLowerCase() : ''),
           image: recipe.image || '',
         }}
         validationSchema={Yup.object({
