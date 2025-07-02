@@ -1,6 +1,8 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { BookOutlined, GlobalOutlined, DashboardOutlined } from '@ant-design/icons';
+import { BookOutlined, DashboardOutlined } from '@ant-design/icons';
+import { FaBowlFood } from 'react-icons/fa6';
+import { GiMeal } from 'react-icons/gi';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/AdminSidebar.css';
 
@@ -34,7 +36,7 @@ const AdminSidebar = () => {
     },
     {
       key: '/admin/cuisines',
-      icon: <GlobalOutlined style={{ color: '#fff', fontSize: 16 }} />,
+      icon: <GiMeal style={{ color: '#fff', fontSize: 18 }} />,
       label: mobile ? null : 'Cuisines',
     },
   ];
