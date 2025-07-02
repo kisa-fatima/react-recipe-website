@@ -47,6 +47,9 @@
   height: 90px !important;
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 .logo {
   font-family: 'Georgia', serif;

@@ -4,6 +4,8 @@ import { fetchAllRecipes } from '../services/recipeApi';
 import { cuisinesData } from '../utils/cusinesData';
 import CusinesChart from '../components/CusinesChart';
 import CusinesPieChart from '../components/CusinesPieChart';
+import MealPieChart from '../components/MealPieChart';
+import DifficultyChart from '../components/DifficultyChart';
 import '../styles/AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -46,6 +48,12 @@ const AdminDashboard = () => {
         </div>
         <div className="grid-item grid-item-2-2">
           <CusinesPieChart />
+        </div>
+        <div className="grid-item grid-item-3-1">
+          <MealPieChart />
+        </div>
+        <div className="grid-item grid-item-3-2">
+          <DifficultyChart />
         </div>
       </div>
     </div>

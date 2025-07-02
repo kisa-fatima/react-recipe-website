@@ -1,0 +1,26 @@
+.difficulty-chart-container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(120, 64, 98, 0.08);
+  padding: 18px 12px 10px 12px;
+  margin: 0;
+  max-width: 100%;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+.difficulty-chart-title {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  font-family: 'Arvo', serif;
+  font-weight: 700;
+}
+@media (max-width: 700px) {
+  .difficulty-chart-container {
+    padding: 10px 2px 6px 2px;
+  }
+  .difficulty-chart-title {
+    font-size: 0.98rem;
+  }
+}

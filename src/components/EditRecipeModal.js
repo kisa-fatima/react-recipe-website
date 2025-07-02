@@ -7,9 +7,15 @@ import { cuisinesData } from '../utils/cusinesData';
 import 'react-toastify/dist/ReactToastify.css';
 
 const mealTypes = [
-  { label: 'Breakfast', value: 'breakfast' },
-  { label: 'Lunch', value: 'lunch' },
   { label: 'Dinner', value: 'dinner' },
+  { label: 'Lunch', value: 'lunch' },
+  { label: 'Appetizer', value: 'appetizer' },
+  { label: 'Side dish', value: 'side dish' },
+  { label: 'Beverage', value: 'beverage' },
+  { label: 'Dessert', value: 'dessert' },
+  { label: 'Breakfast', value: 'breakfast' },
+  { label: 'Snack', value: 'snack' },
+  { label: 'Snacks', value: 'snacks' },
 ];
 
 const difficulties = [

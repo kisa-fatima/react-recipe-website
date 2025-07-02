@@ -20,4 +20,17 @@
   color: #444;
   font-size: 1.15rem;
   margin-bottom: 0;
+}
+
+.ant-layout-sider, .admin-sidebar, .admin-sidebar-container {
+  position: sticky;
+  top: 45px;
+  height: calc(100vh - 45px);
+  z-index: 10;
+}
+
+.main-header.admin-header-override {
+  position: sticky;
+  top: 0;
+  z-index: 30;
 } 
