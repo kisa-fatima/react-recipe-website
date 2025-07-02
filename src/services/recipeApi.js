@@ -1,4 +1,5 @@
 import { cuisinesData } from "../utils/cusinesData";
+import axios from 'axios';
 
 const BASE_URL = 'https://dummyjson.com/recipes';
 
@@ -108,3 +109,120 @@ export const filterRecipesByMealType = async (mealType) => {
     return [];
   }
 };
+
+
+/**
+ * Add a new recipe.
+ * @param {Object} recipeData - Recipe object to add.
+ */
+export const addRecipe = async (recipeData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/add`, recipeData);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding recipe:', error);
+    return null;
+  }
+};
+
+
+/**
+ * Update a recipe by ID.
+ * @param {number} id - Recipe ID to update.
+ * @param {Object} updatedData - Updated recipe fields.
+ */
+export const updateRecipe = async (id, updatedData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/${id}`, updatedData);
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating recipe with id ${id}:`, error);
+    // Fallback: simulate local update for non-persisted recipes
+    if (error.response) {
+      console.error('API error response:', error.response.data);
+    }
+    // Try to update in-memory if exists (for local-only recipes)
+    if (Array.isArray(window._localRecipes)) {
+      const idx = window._localRecipes.findIndex(r => r.id === id);
+      if (idx !== -1) {
+        window._localRecipes[idx] = { ...window._localRecipes[idx], ...updatedData };
+        console.warn('Simulated local update for recipe:', window._localRecipes[idx]);
+        return window._localRecipes[idx];
+      }
+    }
+    return null;
+  }
+};
+
+/**
+ * Add a new cuisine type locally (simulate since API doesn't exist).
+ * @param {Object} cuisineData - New cuisine object.
+ */
+export const addCuisine = async (cuisineData) => {
+  try {
+    cuisinesData.push(cuisineData); // simulate update
+    return cuisineData;
+  } catch (error) {
+    console.error('Error adding cuisine:', error);
+    return null;
+  }
+};
+
+/**
+ * Update a cuisine by name (simulate locally).
+ * @param {string} cuisineName - Cuisine name to update.
+ * @param {Object} updatedData - New values to update.
+ */
+export const updateCuisine = async (cuisineName, updatedData) => {
+  try {
+    const index = cuisinesData.findIndex(
+      (c) => c.name.toLowerCase() === cuisineName.toLowerCase()
+    );
+    if (index !== -1) {
+      cuisinesData[index] = { ...cuisinesData[index], ...updatedData };
+      return cuisinesData[index];
+    }
+    return null;
+  } catch (error) {
+    console.error(`Error updating cuisine "${cuisineName}":`, error);
+    return null;
+  }
+};
+
+/**
+ * Delete a recipe by ID.
+ * @param {number} id - The ID of the recipe to delete.
+ * @returns {Promise<Object|null>} - Deleted recipe data or null if failed.
+ */
+export const deleteRecipe = async (id) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error deleting recipe with id ${id}:`, error);
+    return null;
+  }
+};
+
+
+/**
+ * Delete a cuisine by name (simulated locally).
+ * @param {string} cuisineName - The name of the cuisine to delete.
+ * @returns {boolean} - True if deleted, false otherwise.
+ */
+export const deleteCuisine = async (cuisineName) => {
+  try {
+    const index = cuisinesData.findIndex(
+      (c) => c.name.toLowerCase() === cuisineName.toLowerCase()
+    );
+    if (index !== -1) {
+      cuisinesData.splice(index, 1); // remove from array
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error(`Error deleting cuisine "${cuisineName}":`, error);
+    return false;
+  }
+};
+

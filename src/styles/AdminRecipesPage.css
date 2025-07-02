@@ -1,5 +1,5 @@
 .admin-recipes-page {
-  padding: 32px;
+  padding:  10px 32px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -11,11 +11,49 @@
   font-family: 'Arvo', serif;
   font-weight: 700;
   font-size: 2rem;
-  margin-bottom: 16px;
 }
 
-.admin-page-desc {
-  color: #666;
-  font-size: 1.1rem;
-  margin-bottom: 32px;
+
+
+.admin-recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 8px;
+  justify-items: center;
+}
+
+.admin-recipes-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+.admin-add-recipe-btn {
+  display: flex;
+  align-items: center;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  box-shadow: 0 2px 8px rgba(120,64,98,0.08);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  outline: none;
+}
+.admin-add-recipe-btn:hover, .admin-add-recipe-btn:focus {
+  background: #a07a9c;
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .admin-recipes-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 18px;
+  }
 } 
