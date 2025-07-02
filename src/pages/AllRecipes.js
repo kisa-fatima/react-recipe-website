@@ -20,9 +20,15 @@ const AllRecipes = () => {
 
   const mealTypes = [
     { label: 'All', value: '' },
-    { label: 'Breakfast', value: 'breakfast' },
-    { label: 'Lunch', value: 'lunch' },
     { label: 'Dinner', value: 'dinner' },
+    { label: 'Lunch', value: 'lunch' },
+    { label: 'Appetizer', value: 'appetizer' },
+    { label: 'Side dish', value: 'side dish' },
+    { label: 'Beverage', value: 'beverage' },
+    { label: 'Dessert', value: 'dessert' },
+    { label: 'Breakfast', value: 'breakfast' },
+    { label: 'Snack', value: 'snack' },
+    { label: 'Snacks', value: 'snacks' },
   ];
 
   // Read from URL query params

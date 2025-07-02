@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchRecipeById } from '../services/recipeApi';
 import '../styles/RecipePage.css';
-import { FaBowlFood } from 'react-icons/fa6';
+import { FaBowlFood, FaClock, FaFire, FaUsers, FaChartBar, FaBolt } from 'react-icons/fa6';
 import Loader from '../components/Loader';
 
 const RecipePage = () => {
@@ -52,12 +52,43 @@ const RecipePage = () => {
       </div>
       <div className="recipe-page-details">
         <p><strong>
-          {/* Cuisine Icon */}
           <span className="recipe-page-icon" style={{marginRight: '0.4em', verticalAlign: 'middle'}}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9" stroke="#edb654" strokeWidth="2"/><path d="M6 10c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4-4-1.79-4-4z" fill="#edb654"/></svg>
           </span>
           Cuisine:
         </strong> {recipe.cuisine}</p>
+        <p><strong>
+          <span className="recipe-page-icon" style={{marginRight: '0.4em', verticalAlign: 'middle'}}>
+            <FaClock size={18} color="#edb654" />
+          </span>
+          Prep Time:
+        </strong> {recipe.prepTimeMinutes} min</p>
+        <p><strong>
+          <span className="recipe-page-icon" style={{marginRight: '0.4em', verticalAlign: 'middle'}}>
+            <FaFire size={18} color="#edb654" />
+          </span>
+          Cook Time:
+        </strong> {recipe.cookTimeMinutes} min</p>
+        <p><strong>
+          <span className="recipe-page-icon" style={{marginRight: '0.4em', verticalAlign: 'middle'}}>
+            <FaUsers size={18} color="#edb654" />
+          </span>
+          Servings:
+        </strong> {recipe.servings}</p>
+        <p><strong>
+          <span className="recipe-page-icon" style={{marginRight: '0.4em', verticalAlign: 'middle'}}>
+            <FaChartBar size={18} color="#edb654" />
+          </span>
+          Difficulty:
+        </strong> {recipe.difficulty}</p>
+        {recipe.caloriesPerServing && (
+          <p><strong>
+            <span className="recipe-page-icon" style={{marginRight: '0.4em', verticalAlign: 'middle'}}>
+              <FaBolt size={18} color="#edb654" />
+            </span>
+            Calories/Serving:
+          </strong> {recipe.caloriesPerServing}</p>
+        )}
         <p><strong>
           {/* Ingredients Icon */}
           <span className="recipe-page-icon" style={{marginRight: '0.4em', verticalAlign: 'middle'}}>
