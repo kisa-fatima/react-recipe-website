@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { BookOutlined, GlobalOutlined } from '@ant-design/icons';
+import { BookOutlined } from '@ant-design/icons';
+import { FaBowlFood } from 'react-icons/fa6';
+import { GiMeal } from 'react-icons/gi';
 import { fetchAllRecipes } from '../services/recipeApi';
 import { cuisinesData } from '../utils/cusinesData';
 import CusinesChart from '../components/CusinesChart';
@@ -36,7 +38,7 @@ const AdminDashboard = () => {
         </div>
         <div className="admin-dashboard-widget grid-item grid-item-1-2">
           <div className="widget-icon" style={{ background: 'var(--secondary-color, #ff7f50)' }}>
-            <GlobalOutlined style={{ fontSize: 24, color: '#fff' }} />
+            <GiMeal style={{ fontSize: 24, color: '#fff' }} />
           </div>
           <div className="widget-info">
             <div className="widget-label">Total Cuisines</div>
