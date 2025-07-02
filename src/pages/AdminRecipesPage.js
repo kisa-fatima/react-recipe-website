@@ -87,6 +87,8 @@ const AdminRecipesPage = () => {
               image={recipe.image}
               label={recipe.name || recipe.title}
               cuisine={recipe.cuisine}
+              mealType={recipe.mealType}
+              difficulty={recipe.difficulty}
               ingredients={recipe.ingredients}
               instructions={recipe.instructions}
               onEdit={() => handleEdit(recipe)}
