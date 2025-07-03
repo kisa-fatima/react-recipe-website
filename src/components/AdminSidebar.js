@@ -19,23 +19,23 @@ const AdminSidebar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Ensure dashboard is selected for both /admin and /admin/dashboard
+  // Ensure dashboard is selected for both /log-in/admin and /log-in/admin/dashboard
   let selectedKey = location.pathname;
-  if (selectedKey === '/admin') selectedKey = '/admin/dashboard';
+  if (selectedKey === '/log-in/admin') selectedKey = '/log-in/admin/dashboard';
 
   const menuItems = [
     {
-      key: '/admin/dashboard',
+      key: '/log-in/admin/dashboard',
       icon: <DashboardOutlined style={{ color: '#fff', fontSize: 16 }} />,
       label: mobile ? null : 'Dashboard',
     },
     {
-      key: '/admin/recipes',
+      key: '/log-in/admin/recipes',
       icon: <BookOutlined style={{ color: '#fff', fontSize: 16 }} />,
       label: mobile ? null : 'Recipes',
     },
     {
-      key: '/admin/cuisines',
+      key: '/log-in/admin/cuisines',
       icon: <GiMeal style={{ color: '#fff', fontSize: 18 }} />,
       label: mobile ? null : 'Cuisines',
     },

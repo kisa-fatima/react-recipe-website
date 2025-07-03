@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Row, Col, Button, Drawer } from 'antd';
 import { SearchOutlined, MenuOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SearchDrawer from './SearchDrawer';
 import { FaUserAlt } from 'react-icons/fa';
 import LoginModal from './LoginModal';
+import Loader from './Loader';
+import { useAuth } from '../App';
 
 const { Header: AntHeader } = Layout;
 
@@ -21,7 +23,9 @@ const Header = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILE_BREAKPOINT);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const { loginModalOpen, setLoginModalOpen } = useAuth();
+  const [loginLoading, setLoginLoading] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,6 +34,14 @@ const Header = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleLoginBtnClick = () => {
+    setLoginLoading(true);
+    setTimeout(() => {
+      navigate('/log-in');
+      setLoginLoading(false);
+    }, 600);
+  };
 
   return (
     <div className="header-wrapper">
@@ -58,14 +70,14 @@ const Header = () => {
                 >
                   <Menu mode="vertical" className="nav-menu-mobile" selectable={false} items={navItems} onClick={() => setDrawerVisible(false)} />
                   <Button type="text" icon={<SearchOutlined />} className="search-btn" onClick={() => setSearchDrawerOpen(true)} />
-                  <Button type="text" icon={<FaUserAlt size={20} style={{ color: 'var(--primary-color)' }} />} className="login-btn" onClick={() => setLoginModalOpen(true)} style={{ marginLeft: 8 }} />
+                  <Button type="text" icon={<FaUserAlt size={20} style={{ color: 'var(--primary-color)' }} />} className="login-btn" onClick={handleLoginBtnClick} style={{ marginLeft: 8 }} />
                 </Drawer>
               </>
             ) : (
               <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '1.5em' }}>
                 <Menu mode="horizontal" className="nav-menu" selectable={false} items={navItems} />
                 <Button type="text" icon={<SearchOutlined />} className="search-btn" onClick={() => setSearchDrawerOpen(true)} />
-                <Button type="text" icon={<FaUserAlt size={20} style={{ color: 'var(--primary-color)' }} />} className="login-btn" onClick={() => setLoginModalOpen(true)} style={{ marginLeft: 8 }} />
+                <Button type="text" icon={<FaUserAlt size={20} style={{ color: 'var(--primary-color)' }} />} className="login-btn" onClick={handleLoginBtnClick} style={{ marginLeft: 8 }} />
               </div>
             )}
           </Col>
@@ -73,6 +85,7 @@ const Header = () => {
       </AntHeader>
       <SearchDrawer open={searchDrawerOpen} onClose={() => setSearchDrawerOpen(false)} />
       <LoginModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      {loginLoading && <Loader />}
     </div>
   );
 };
