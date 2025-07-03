@@ -1,36 +1,44 @@
 import React, { useState } from 'react';
 import { Modal, Input, Button } from 'antd';
 import { FiLogIn } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/LoginModal.css';
-
-const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD = 'admin123';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
+import { adminUsers } from '../utils/adminUsers';
+import { useAuth } from '../App';
 
 const LoginModal = ({ open, onClose, onLogin }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const location = useLocation();
   const navigate = useNavigate();
+  const { handleLogin: doAdminLogin } = useAuth();
 
   const handleLogin = async () => {
     setLoading(true);
     setError('');
-    setTimeout(() => {
+    try {
+      // Check if email/password is in adminUsers
+      const admin = adminUsers.find(
+        (user) => user.email === email && user.password === password
+      );
+      if (!admin) {
+        setError('You are not authorized as an admin.');
       setLoading(false);
-      if (username && password) {
-        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-          onLogin && onLogin({ username });
-          onClose();
-          navigate('/admin');
-        } else {
-          setError('Invalid admin credentials.');
-        }
-      } else {
-        setError('Please enter both username and password.');
+        return;
       }
-    }, 800);
+      // Firebase Auth
+      await signInWithEmailAndPassword(auth, email, password);
+      doAdminLogin();
+      onLogin && onLogin({ email });
+      navigate('/log-in/admin', { replace: true });
+    } catch (err) {
+      setError('Invalid credentials or user does not exist.');
+    }
+    setLoading(false);
   };
 
   return (
@@ -44,9 +52,9 @@ const LoginModal = ({ open, onClose, onLogin }) => {
     >
       <div className="login-modal-fields">
         <Input
-          placeholder="Username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
           size="large"
           className="login-modal-input"
           autoFocus
