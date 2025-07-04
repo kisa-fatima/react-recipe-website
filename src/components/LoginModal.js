@@ -7,7 +7,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { adminUsers } from '../utils/adminUsers';
 import { useDispatch } from 'react-redux';
-import { loginAdmin } from '../store/adminAuthSlice';
+import { ADMIN_LOGIN_REQUEST } from '../store/adminAuthSaga';
 
 const LoginModal = ({ open, onClose, onLogin }) => {
   const [email, setEmail] = useState('');
@@ -33,9 +33,8 @@ const LoginModal = ({ open, onClose, onLogin }) => {
       }
       // Firebase Auth
       await signInWithEmailAndPassword(auth, email, password);
-      dispatch(loginAdmin({ email }));
+      dispatch({ type: ADMIN_LOGIN_REQUEST, payload: { email, navigate } });
       onLogin && onLogin({ email });
-      navigate('/log-in/admin', { replace: true });
     } catch (err) {
       setError('Invalid credentials or user does not exist.');
     }

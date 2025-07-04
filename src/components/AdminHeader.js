@@ -5,7 +5,7 @@ import { FaHome } from 'react-icons/fa';
 import { MdDashboard } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAdmin } from '../store/adminAuthSlice';
+import { ADMIN_LOGOUT_REQUEST } from '../store/adminAuthSaga';
 
 const MOBILE_BREAKPOINT = 700;
 
@@ -25,8 +25,7 @@ const AdminHeader = ({ onLogout, showDashboardButton }) => {
     if (onLogout) {
       onLogout();
     } else {
-      dispatch(logoutAdmin());
-      navigate('/log-in');
+      dispatch({ type: ADMIN_LOGOUT_REQUEST, payload: { navigate } });
     }
   };
 
