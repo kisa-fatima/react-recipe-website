@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import adminAuthReducer from './adminAuthSlice';
-import { persistReducer, persistStore } from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
