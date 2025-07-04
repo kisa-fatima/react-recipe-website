@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate, useNavigate } from "react-router-dom";
 import { Layout } from "antd";
 import Header from "./components/Header";
@@ -16,14 +16,13 @@ import AdminRecipesPage from './pages/AdminRecipesPage';
 import AdminCuisinesPage from './pages/AdminCuisinesPage';
 import AdminDashboard from './pages/AdminDashboard';
 import LoginModal from './components/LoginModal';
-
-export const AuthContext = createContext();
-export const useAuth = () => useContext(AuthContext);
+import AdminHeader from './components/AdminHeader';
+import { useSelector } from 'react-redux';
 
 function ProtectedRoute({ children }) {
-  const { isAdmin } = useAuth();
+  const isAdminLoggedIn = useSelector((state) => state.adminAuth.isAdminLoggedIn);
   const location = useLocation();
-  if (!isAdmin) {
+  if (!isAdminLoggedIn) {
     return <Navigate to="/log-in" state={{ from: location }} replace />;
   }
   return children;
@@ -34,7 +33,9 @@ function AppLayout() {
   const navigate = useNavigate();
   const isAdminRoute = location.pathname.startsWith('/log-in/admin');
   const isLoginRoute = location.pathname === '/log-in';
-  const { loginModalOpen, setLoginModalOpen } = useAuth();
+  const isHomeRoute = location.pathname === '/';
+  const [loginModalOpen, setLoginModalOpen] = React.useState(false);
+  const isAdminLoggedIn = useSelector((state) => state.adminAuth.isAdminLoggedIn);
 
   React.useEffect(() => {
     if (isLoginRoute && !loginModalOpen) {
@@ -43,7 +44,7 @@ function AppLayout() {
     if (!isLoginRoute && loginModalOpen) {
       setLoginModalOpen(false);
     }
-  }, [isLoginRoute, loginModalOpen, setLoginModalOpen]);
+  }, [isLoginRoute, loginModalOpen]);
 
   const handleLoginModalClose = () => {
     setLoginModalOpen(false);
@@ -52,8 +53,12 @@ function AppLayout() {
     }
   };
 
+  // Show AdminHeader above Header if admin is logged in and not in admin panel
+  const showAdminHeader = isAdminLoggedIn && !isAdminRoute;
+
   return (
       <Layout>
+      {showAdminHeader && <AdminHeader showDashboardButton />}
       {!isAdminRoute && <Header />}
         <Layout.Content style={{ minHeight: 'calc(100vh - 90px)' }}>
           <Routes>
@@ -84,23 +89,10 @@ function AppLayout() {
 }
 
 export default function App() {
-  const [isAdmin, setIsAdmin] = useState(localStorage.getItem('isAdmin') === 'true');
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
-  const handleLogin = () => {
-    setIsAdmin(true);
-    localStorage.setItem('isAdmin', 'true');
-    setLoginModalOpen(false);
-  };
-  const handleLogout = () => {
-    setIsAdmin(false);
-    localStorage.removeItem('isAdmin');
-  };
   return (
-    <AuthContext.Provider value={{ isAdmin, setIsAdmin, loginModalOpen, setLoginModalOpen, handleLogin, handleLogout }}>
-      <Router>
-        <AppLayout />
-        <ToastContainer position="top-right" theme="colored" />
-      </Router>
-    </AuthContext.Provider>
+    <Router>
+      <AppLayout />
+      <ToastContainer position="top-right" theme="colored" />
+    </Router>
   );
 }

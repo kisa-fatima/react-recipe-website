@@ -6,7 +6,6 @@ import SearchDrawer from './SearchDrawer';
 import { FaUserAlt } from 'react-icons/fa';
 import LoginModal from './LoginModal';
 import Loader from './Loader';
-import { useAuth } from '../App';
 
 const { Header: AntHeader } = Layout;
 
@@ -23,8 +22,8 @@ const Header = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILE_BREAKPOINT);
   const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { loginModalOpen, setLoginModalOpen } = useAuth();
   const [loginLoading, setLoginLoading] = useState(false);
 
   useEffect(() => {
@@ -40,6 +39,7 @@ const Header = () => {
     setTimeout(() => {
       navigate('/log-in');
       setLoginLoading(false);
+      setLoginModalOpen(true);
     }, 600);
   };
 

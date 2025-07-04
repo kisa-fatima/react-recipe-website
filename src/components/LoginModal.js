@@ -6,7 +6,8 @@ import '../styles/LoginModal.css';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { adminUsers } from '../utils/adminUsers';
-import { useAuth } from '../App';
+import { useDispatch } from 'react-redux';
+import { loginAdmin } from '../store/adminAuthSlice';
 
 const LoginModal = ({ open, onClose, onLogin }) => {
   const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ const LoginModal = ({ open, onClose, onLogin }) => {
   const [error, setError] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-  const { handleLogin: doAdminLogin } = useAuth();
+  const dispatch = useDispatch();
 
   const handleLogin = async () => {
     setLoading(true);
@@ -27,12 +28,12 @@ const LoginModal = ({ open, onClose, onLogin }) => {
       );
       if (!admin) {
         setError('You are not authorized as an admin.');
-      setLoading(false);
+        setLoading(false);
         return;
       }
       // Firebase Auth
       await signInWithEmailAndPassword(auth, email, password);
-      doAdminLogin();
+      dispatch(loginAdmin({ email }));
       onLogin && onLogin({ email });
       navigate('/log-in/admin', { replace: true });
     } catch (err) {
