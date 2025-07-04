@@ -1,8 +1,41 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Tooltip, Avatar } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
+import { FaHome } from 'react-icons/fa';
+import { MdDashboard } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutAdmin } from '../store/adminAuthSlice';
 
-const AdminHeader = ({ onLogout }) => {
+const MOBILE_BREAKPOINT = 700;
+
+const AdminHeader = ({ onLogout, showDashboardButton }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const adminEmail = useSelector((state) => state.adminAuth.adminEmail);
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= MOBILE_BREAKPOINT);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleLogout = () => {
+    if (onLogout) {
+      onLogout();
+    } else {
+      dispatch(logoutAdmin());
+      navigate('/log-in');
+    }
+  };
+
+  // Get initial from email
+  const getInitial = (email) => {
+    if (!email) return '?';
+    return email.trim().charAt(0).toUpperCase();
+  };
+
   return (
     <>
       <style>{`
@@ -15,6 +48,26 @@ const AdminHeader = ({ onLogout }) => {
         .admin-header-override .logo {
           font-size: 20px !important;
           height: 45px !important;
+        }
+        .admin-header-avatar {
+          border: 2px solid var(--primary-color);
+          background: #fff;
+          color: var(--primary-color);
+          font-weight: 700;
+          margin-left: 0px;
+          cursor: pointer;
+          user-select: none;
+          box-sizing: border-box;
+        }
+        .admin-header-btn {
+          transition: background 0.15s, color 0.15s;
+        }
+        .admin-header-btn:hover, .admin-header-btn:focus {
+          background: #f0e6f6 !important;
+          color: var(--primary-color) !important;
+        }
+        .admin-header-btn:hover .anticon, .admin-header-btn:focus .anticon {
+          color: var(--primary-color) !important;
         }
       `}</style>
       <div
@@ -35,14 +88,43 @@ const AdminHeader = ({ onLogout }) => {
           <span className="logo-of">of</span>
           <span className="logo-main">yum</span>
         </div>
-        <Button
-          type="primary"
-          icon={<LogoutOutlined />}
-          onClick={onLogout}
-          style={{ background: 'var(--primary-color)', border: 'none', fontWeight: 600, height: 32, display: 'flex', alignItems: 'center', fontSize: 14, padding: '0 12px' }}
-        >
-          Log Out
-        </Button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          {showDashboardButton ? (
+            <Button
+              type="default"
+              icon={<MdDashboard size={18} />}
+              onClick={() => navigate('/log-in/admin/dashboard')}
+              style={{ background: '#fff', color: 'var(--primary-color)', border: 'none', fontWeight: 600, height: 32, display: 'flex', alignItems: 'center', fontSize: 16, padding: '0 10px' }}
+              className="admin-header-btn"
+            >
+              {!isMobile && 'Dashboard'}
+            </Button>
+          ) : (
+            <Button
+              type="default"
+              icon={<FaHome size={18} />}
+              onClick={() => navigate('/')}
+              style={{ background: '#fff', color: 'var(--primary-color)', border: 'none', fontWeight: 600, height: 32, display: 'flex', alignItems: 'center', fontSize: 16, padding: '0 10px' }}
+              className="admin-header-btn"
+            >
+              {!isMobile && 'Home'}
+            </Button>
+          )}
+          <Button
+            type="default"
+            icon={<LogoutOutlined style={{ color: 'var(--primary-color)', fontSize: 16, fontWeight: 600 }} />}
+            onClick={handleLogout}
+            style={{ background: '#fff', color: 'var(--primary-color)', border: 'none', fontWeight: 600, height: 32, display: 'flex', alignItems: 'center', fontSize: 16, padding: '0 10px' }}
+            className="admin-header-btn"
+          >
+            {!isMobile && 'Log Out'}
+          </Button>
+          <Tooltip title={adminEmail ? `Logged in as ${adminEmail}` : ''} placement="bottom">
+            <Avatar className="admin-header-avatar" size={32}>
+              {getInitial(adminEmail)}
+            </Avatar>
+          </Tooltip>
+        </div>
       </div>
     </>
   );
