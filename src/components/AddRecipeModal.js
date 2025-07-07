@@ -27,15 +27,9 @@ const defaultImage = 'https://via.placeholder.com/300x200?text=No+Image';
 
 const AddRecipeModal = ({ open, onClose, onRecipeAdded }) => {
   const [cuisineOptions, setCuisineOptions] = useState([]);
-  const [lastId, setLastId] = useState(0);
 
   useEffect(() => {
     fetchRecipeCusineTypes().then(data => setCuisineOptions(data || cuisinesData));
-    fetchAllRecipes(1000, 0).then(data => {
-      if (data && data.length > 0) {
-        setLastId(Math.max(...data.map(r => r.id)));
-      }
-    });
   }, [open]);
 
   return (
@@ -74,7 +68,6 @@ const AddRecipeModal = ({ open, onClose, onRecipeAdded }) => {
         })}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           const newRecipe = {
-            id: lastId + 1,
             name: values.name,
             ingredients: values.ingredients.split('\n').map(i => i.trim()).filter(Boolean),
             instructions: values.instructions.split('\n').map(i => i.trim()).filter(Boolean),

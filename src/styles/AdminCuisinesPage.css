@@ -20,6 +20,10 @@
   margin-bottom: 32px;
 }
 
+.admin-search-bar {
+  margin: 16px 0 8px 0;
+}
+
 @media (max-width: 700px) {
   .admin-cuisines-page {
     padding: 8px 2vw;

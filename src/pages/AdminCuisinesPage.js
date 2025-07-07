@@ -4,7 +4,7 @@ import { FiPlus } from 'react-icons/fi';
 import AddCusineModal from '../components/AddCusineModal';
 import EditCusineModal from '../components/EditCusineModal';
 import { fetchRecipeCusineTypes, updateCuisine, deleteCuisine, addCuisine } from '../services/recipeApi';
-import { message } from 'antd';
+import { message, Input } from 'antd';
 import '../styles/AdminCuisinesPage.css';
 import '../styles/AdminRecipeCard.css';
 
@@ -15,6 +15,7 @@ const AdminCuisinesPage = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editingCuisine, setEditingCuisine] = useState(null);
   const [originalCuisineName, setOriginalCuisineName] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Fetch cuisines from Firestore
   const loadCuisines = async () => {
@@ -70,12 +71,24 @@ const AdminCuisinesPage = () => {
     }
   };
 
+  const filteredCuisines = cuisines.filter(cuisine =>
+    (cuisine.name || '').toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="admin-cuisines-page">
       <AddCusineModal open={addModalOpen} onClose={() => setAddModalOpen(false)} onAdd={handleCuisineAdded} />
       <EditCusineModal open={editModalOpen} onClose={() => setEditModalOpen(false)} cuisine={editingCuisine} onEdit={handleCuisineEdited} />
       <div className="admin-recipes-header-row">
         <h1 className="admin-page-title">Cuisine Management</h1>
+        <Input.Search
+          className="admin-search-bar"
+          placeholder="Search cuisines..."
+          allowClear
+          style={{ maxWidth: 320, margin: '0 16px' }}
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+        />
         <button className="admin-add-recipe-btn" onClick={handleAddCuisine}>
           <FiPlus size={20} style={{ marginRight: 7, marginBottom: -2 }} /> Add Cuisine
         </button>
@@ -85,7 +98,7 @@ const AdminCuisinesPage = () => {
         <div style={{ textAlign: 'center', marginTop: 40 }}>Loading cuisines...</div>
       ) : (
         <div className="admin-recipes-grid">
-          {cuisines.map((cuisine) => (
+          {filteredCuisines.map((cuisine) => (
             <AdminCusineCard
               key={cuisine.id || cuisine.name}
               image={cuisine.image}

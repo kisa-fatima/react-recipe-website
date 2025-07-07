@@ -139,7 +139,7 @@ export const addRecipe = async (recipeData) => {
 
 /**
  * Update a recipe by ID.
- * @param {number} id - Recipe ID to update.
+ * @param {string} id - Firestore document ID of the recipe to update.
  * @param {Object} updatedData - Updated recipe fields.
  */
 export const updateRecipe = async (id, updatedData) => {
@@ -192,14 +192,27 @@ export const updateCuisine = async (cuisineName, updatedData) => {
 
 /**
  * Delete a recipe by ID.
- * @param {number} id - The ID of the recipe to delete.
+ * @param {string} id - Firestore document ID of the recipe to delete.
  * @returns {Promise<Object|null>} - Deleted recipe data or null if failed.
  */
 export const deleteRecipe = async (id) => {
   try {
+    // Try to delete by Firestore document ID first
     const docRef = doc(db, 'recipes', id);
-    await deleteDoc(docRef);
-    return { id };
+    try {
+      await deleteDoc(docRef);
+      return { id };
+    } catch (err) {
+      // If that fails, try to find by 'id' field (legacy numeric id)
+      const q = query(collection(db, 'recipes'), where('id', '==', Number(id)));
+      const snapshot = await getDocs(q);
+      if (!snapshot.empty) {
+        const legacyDocRef = snapshot.docs[0].ref;
+        await deleteDoc(legacyDocRef);
+        return { id: legacyDocRef.id };
+      }
+      throw err;
+    }
   } catch (error) {
     console.error(`Error deleting recipe with id ${id}:`, error);
     return null;
