@@ -80,6 +80,7 @@ const AdminHeader = ({ onLogout, showDashboardButton }) => {
           justifyContent: 'space-between',
           boxShadow: '0 2px 8px rgba(120,64,98,0.08)',
           zIndex: 10,
+          borderBottom: '0.5px solid var(--primary-color)',
         }}
       >
         <div className="logo" style={{ display: 'flex', alignItems: 'center', fontFamily: 'Arvo, serif', fontWeight: 400, letterSpacing: 1 }}>

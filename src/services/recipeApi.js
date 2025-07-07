@@ -1,18 +1,21 @@
+import { collection, getDocs, query, limit, startAfter, orderBy, doc, getDoc, addDoc, updateDoc, deleteDoc, where } from 'firebase/firestore';
+import { db } from '../firebase';
 import { cuisinesData } from "../utils/cusinesData";
-import axios from 'axios';
-
-const BASE_URL = 'https://dummyjson.com/recipes';
 
 /**
  * Fetch all recipes (paginated).
  * @param {number} limit - Number of recipes to fetch.
  * @param {number} skip - Number of recipes to skip.
  */
-export const fetchAllRecipes = async (limit = 20, skip = 0) => {
+export const fetchAllRecipes = async (limitNum = 20, lastVisible = null) => {
   try {
-    const response = await fetch(`${BASE_URL}?limit=${limit}&skip=${skip}`);
-    const data = await response.json();
-    return data.recipes; // returns an array
+    let q = query(collection(db, 'recipes'), orderBy('name'), limit(limitNum));
+    if (lastVisible) {
+      q = query(collection(db, 'recipes'), orderBy('name'), startAfter(lastVisible), limit(limitNum));
+    }
+    const snapshot = await getDocs(q);
+    const recipes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return recipes;
   } catch (error) {
     console.error('Error fetching recipes:', error);
     return [];
@@ -25,9 +28,13 @@ export const fetchAllRecipes = async (limit = 20, skip = 0) => {
  */
 export const fetchRecipeById = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}/${id}`);
-    const data = await response.json();
-    return data;
+    const docRef = doc(db, 'recipes', id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() };
+    } else {
+      return null;
+    }
   } catch (error) {
     console.error(`Error fetching recipe with id ${id}:`, error);
     return null;
@@ -38,13 +45,16 @@ export const fetchRecipeById = async (id) => {
  * Search recipes by name.
  * @param {string} query - Search keyword.
  */
-export const searchRecipes = async (query) => {
+export const searchRecipes = async (searchQuery) => {
   try {
-    const response = await fetch(`${BASE_URL}/search?q=${query}`);
-    const data = await response.json();
-    return data.recipes;
+    const q = query(collection(db, 'recipes'), orderBy('name'));
+    const snapshot = await getDocs(q);
+    const recipes = snapshot.docs
+      .map(doc => ({ id: doc.id, ...doc.data() }))
+      .filter(recipe => recipe.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    return recipes;
   } catch (error) {
-    console.error(`Error searching for recipes with query "${query}":`, error);
+    console.error(`Error searching for recipes with query "${searchQuery}":`, error);
     return [];
   }
 };
@@ -55,30 +65,28 @@ export const searchRecipes = async (query) => {
  */
 export const filterRecipesByCuisine = async (cuisine) => {
   try {
-    const allRecipes = await fetchAllRecipes(100); // dummyjson doesn't support filtering directly
-    return allRecipes.filter(recipe =>
-      recipe.cuisine.toLowerCase() === cuisine.toLowerCase()
-    );
+    const q = query(collection(db, 'recipes'), where('cuisine', '==', cuisine));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error(`Error filtering recipes by cuisine "${cuisine}":`, error);
     return [];
   }
 };
 
-
 /**
  * Fetch all recipe cuisine types.
  * @returns {Promise<string[]>} - Array of unique cuisine types.
  */
-export  const fetchRecipeCusineTypes = async () => {
- try {
-    const allCuisines = [...cuisinesData]; // dummyjson doesn't support filtering directly
-    return allCuisines;
+export const fetchRecipeCusineTypes = async () => {
+  try {
+    const snapshot = await getDocs(collection(db, 'cuisines'));
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error(`Error getting recipe cuisines:`, error);
     return [];
   }
-}
+};
 
 /** * Fetch details of a specific cuisine.
  * @param {string} cuisine - Cuisine name (e.g., "Italian", "Indian")
@@ -86,13 +94,18 @@ export  const fetchRecipeCusineTypes = async () => {
  */
 export const fetchCusineDetails = async (cuisine) => {
   try {
-    const allCuisines = await fetchRecipeCusineTypes();
-    return allCuisines.find(c => c.name.toLowerCase() === cuisine.toLowerCase());
+    const q = query(collection(db, 'cuisines'), where('name', '==', cuisine));
+    const snapshot = await getDocs(q);
+    if (!snapshot.empty) {
+      const docSnap = snapshot.docs[0];
+      return { id: docSnap.id, ...docSnap.data() };
+    }
+    return null;
   } catch (error) {
     console.error(`Error fetching cuisine details for "${cuisine}":`, error);
     return null;
   }
-}
+};
 
 /**
  * Filter recipes by meal type.
@@ -101,15 +114,14 @@ export const fetchCusineDetails = async (cuisine) => {
  */
 export const filterRecipesByMealType = async (mealType) => {
   try {
-    const response = await fetch(`${BASE_URL}/meal-type/${mealType.toLowerCase()}`);
-    const data = await response.json();
-    return data.recipes || []; // in case the response is empty
+    const q = query(collection(db, 'recipes'), where('mealType', 'array-contains', mealType.toLowerCase()));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error(`Error filtering recipes by meal type "${mealType}":`, error);
     return [];
   }
 };
-
 
 /**
  * Add a new recipe.
@@ -117,14 +129,13 @@ export const filterRecipesByMealType = async (mealType) => {
  */
 export const addRecipe = async (recipeData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/add`, recipeData);
-    return response.data;
+    const docRef = await addDoc(collection(db, 'recipes'), recipeData);
+    return { id: docRef.id, ...recipeData };
   } catch (error) {
     console.error('Error adding recipe:', error);
     return null;
   }
 };
-
 
 /**
  * Update a recipe by ID.
@@ -133,23 +144,12 @@ export const addRecipe = async (recipeData) => {
  */
 export const updateRecipe = async (id, updatedData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/${id}`, updatedData);
-    return response.data;
+    const docRef = doc(db, 'recipes', id);
+    await updateDoc(docRef, updatedData);
+    const updatedDoc = await getDoc(docRef);
+    return { id: updatedDoc.id, ...updatedDoc.data() };
   } catch (error) {
     console.error(`Error updating recipe with id ${id}:`, error);
-    // Fallback: simulate local update for non-persisted recipes
-    if (error.response) {
-      console.error('API error response:', error.response.data);
-    }
-    // Try to update in-memory if exists (for local-only recipes)
-    if (Array.isArray(window._localRecipes)) {
-      const idx = window._localRecipes.findIndex(r => r.id === id);
-      if (idx !== -1) {
-        window._localRecipes[idx] = { ...window._localRecipes[idx], ...updatedData };
-        console.warn('Simulated local update for recipe:', window._localRecipes[idx]);
-        return window._localRecipes[idx];
-      }
-    }
     return null;
   }
 };
@@ -160,8 +160,8 @@ export const updateRecipe = async (id, updatedData) => {
  */
 export const addCuisine = async (cuisineData) => {
   try {
-    cuisinesData.push(cuisineData); // simulate update
-    return cuisineData;
+    const docRef = await addDoc(collection(db, 'cuisines'), cuisineData);
+    return { id: docRef.id, ...cuisineData };
   } catch (error) {
     console.error('Error adding cuisine:', error);
     return null;
@@ -175,12 +175,13 @@ export const addCuisine = async (cuisineData) => {
  */
 export const updateCuisine = async (cuisineName, updatedData) => {
   try {
-    const index = cuisinesData.findIndex(
-      (c) => c.name.toLowerCase() === cuisineName.toLowerCase()
-    );
-    if (index !== -1) {
-      cuisinesData[index] = { ...cuisinesData[index], ...updatedData };
-      return cuisinesData[index];
+    const q = query(collection(db, 'cuisines'), where('name', '==', cuisineName));
+    const snapshot = await getDocs(q);
+    if (!snapshot.empty) {
+      const docRef = snapshot.docs[0].ref;
+      await updateDoc(docRef, updatedData);
+      const updatedDoc = await getDoc(docRef);
+      return { id: updatedDoc.id, ...updatedDoc.data() };
     }
     return null;
   } catch (error) {
@@ -196,14 +197,14 @@ export const updateCuisine = async (cuisineName, updatedData) => {
  */
 export const deleteRecipe = async (id) => {
   try {
-    const response = await axios.delete(`${BASE_URL}/${id}`);
-    return response.data;
+    const docRef = doc(db, 'recipes', id);
+    await deleteDoc(docRef);
+    return { id };
   } catch (error) {
     console.error(`Error deleting recipe with id ${id}:`, error);
     return null;
   }
 };
-
 
 /**
  * Delete a cuisine by name (simulated locally).
@@ -212,11 +213,11 @@ export const deleteRecipe = async (id) => {
  */
 export const deleteCuisine = async (cuisineName) => {
   try {
-    const index = cuisinesData.findIndex(
-      (c) => c.name.toLowerCase() === cuisineName.toLowerCase()
-    );
-    if (index !== -1) {
-      cuisinesData.splice(index, 1); // remove from array
+    const q = query(collection(db, 'cuisines'), where('name', '==', cuisineName));
+    const snapshot = await getDocs(q);
+    if (!snapshot.empty) {
+      const docRef = snapshot.docs[0].ref;
+      await deleteDoc(docRef);
       return true;
     }
     return false;

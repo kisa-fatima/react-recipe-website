@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminCusineCard from '../components/AdminCusineCard';
-import { cuisinesData } from '../utils/cusinesData';
 import { FiPlus } from 'react-icons/fi';
 import AddCusineModal from '../components/AddCusineModal';
 import EditCusineModal from '../components/EditCusineModal';
-import { updateCuisine } from '../services/recipeApi';
+import { fetchRecipeCusineTypes, updateCuisine, deleteCuisine, addCuisine } from '../services/recipeApi';
 import { message } from 'antd';
 import '../styles/AdminCuisinesPage.css';
 import '../styles/AdminRecipeCard.css';
 
 const AdminCuisinesPage = () => {
-  const [cuisines, setCuisines] = useState(cuisinesData);
+  const [cuisines, setCuisines] = useState([]);
   const [loading, setLoading] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editingCuisine, setEditingCuisine] = useState(null);
   const [originalCuisineName, setOriginalCuisineName] = useState(null);
+
+  // Fetch cuisines from Firestore
+  const loadCuisines = async () => {
+    setLoading(true);
+    const data = await fetchRecipeCusineTypes();
+    setCuisines(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadCuisines();
+  }, []);
 
   const handleEdit = (cuisine) => {
     setEditingCuisine(cuisine);
@@ -23,28 +34,39 @@ const AdminCuisinesPage = () => {
     setEditModalOpen(true);
   };
 
-  const handleDelete = (cuisine) => {
-    // TODO: Implement delete logic/confirmation
-    setCuisines(prev => prev.filter(c => c.name !== cuisine.name));
-    // Optionally show a message.success here
+  const handleDelete = async (cuisine) => {
+    setLoading(true);
+    const result = await deleteCuisine(cuisine.name);
+    if (result) {
+      message.success('Cuisine deleted!', 2);
+      await loadCuisines();
+    } else {
+      message.error('Failed to delete cuisine', 2);
+      setLoading(false);
+    }
   };
 
   const handleAddCuisine = () => {
     setAddModalOpen(true);
   };
 
-  const handleCuisineAdded = (newCuisine) => {
-    setCuisines(prev => [newCuisine, ...prev]);
+  const handleCuisineAdded = async (newCuisine) => {
+    setLoading(true);
+    await addCuisine(newCuisine);
+    await loadCuisines();
+    setAddModalOpen(false);
   };
 
   const handleCuisineEdited = async (updatedCuisine) => {
+    setLoading(true);
     const result = await updateCuisine(originalCuisineName, updatedCuisine);
     if (result) {
-      setCuisines(prev => prev.map(c => c.name === originalCuisineName ? updatedCuisine : c));
       message.success('Cuisine updated!', 2);
-      console.log('Updated cuisine:', result);
+      await loadCuisines();
+      setEditModalOpen(false);
     } else {
       message.error('Failed to update cuisine', 2);
+      setLoading(false);
     }
   };
 
@@ -65,7 +87,7 @@ const AdminCuisinesPage = () => {
         <div className="admin-recipes-grid">
           {cuisines.map((cuisine) => (
             <AdminCusineCard
-              key={cuisine.name}
+              key={cuisine.id || cuisine.name}
               image={cuisine.image}
               name={cuisine.name}
               description={cuisine.description}
