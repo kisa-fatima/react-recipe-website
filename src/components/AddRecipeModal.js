@@ -54,6 +54,7 @@ const AddRecipeModal = ({ open, onClose, onRecipeAdded }) => {
           difficulty: '',
           mealType: '',
           image: '',
+          tags: '',
         }}
         validationSchema={Yup.object({
           name: Yup.string().required('Required'),
@@ -80,6 +81,7 @@ const AddRecipeModal = ({ open, onClose, onRecipeAdded }) => {
             image: values.image || defaultImage,
             rating: 0,
             reviewCount: 0,
+            tags: values.tags.split(',').map(t => t.trim()).filter(Boolean),
           };
           const result = await addRecipe(newRecipe);
           if (result) {
@@ -161,6 +163,10 @@ const AddRecipeModal = ({ open, onClose, onRecipeAdded }) => {
             <div className="form-row">
               <label>Image URL <span className="form-hint">(optional)</span></label>
               <Field name="image" className="form-input" />
+            </div>
+            <div className="form-row">
+              <label>Tags <span className="form-hint">(comma separated, e.g. Vegan, Quick, Gluten-Free)</span></label>
+              <Field name="tags" className="form-input" placeholder="e.g. Vegan, Quick, Gluten-Free" />
             </div>
             <div className="form-actions">
               <button type="submit" className="form-submit-btn" disabled={isSubmitting}>

@@ -96,6 +96,39 @@
   margin: 0 2px;
 }
 
+.recipe-page-tags-row {
+  margin: 0.7rem 0 1.2rem 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7em;
+}
+
+.recipe-page-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7em;
+  margin-left: 0.7em;
+}
+
+.recipe-tag-pill {
+  background: rgba(120, 64, 98, 0.10); /* faded primary color */
+  color: var(--primary-color);
+  font-size: 1rem;
+  padding: 0.32em 1em;
+  border-radius: 1.2em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 3px rgba(120, 64, 98, 0.04);
+  transition: background 0.2s;
+  cursor: default;
+  user-select: none;
+}
+
+.recipe-tag-pill:hover {
+  /* background: rgba(120, 64, 98, 0.18); */
+}
+
 @media (max-width: 900px) {
   .recipe-page-container {
     padding: 1.2rem 0.5rem 1.2rem 0.5rem;

@@ -57,6 +57,7 @@ const EditRecipeModal = ({ open, onClose, recipe, onRecipeUpdated }) => {
           difficulty: (recipe.difficulty || '').toLowerCase(),
           mealType: Array.isArray(recipe.mealType) ? (recipe.mealType[0] ? recipe.mealType[0].toLowerCase() : '') : (recipe.mealType ? recipe.mealType.toLowerCase() : ''),
           image: recipe.image || '',
+          tags: Array.isArray(recipe.tags) ? recipe.tags.join(', ') : (recipe.tags || ''),
         }}
         validationSchema={Yup.object({
           name: Yup.string().required('Required'),
@@ -82,6 +83,7 @@ const EditRecipeModal = ({ open, onClose, recipe, onRecipeUpdated }) => {
             difficulty: values.difficulty,
             mealType: [values.mealType],
             image: values.image || defaultImage,
+            tags: values.tags.split(',').map(t => t.trim()).filter(Boolean),
           };
           const result = await updateRecipe(recipe.id, updatedRecipe);
           console.log('API response (updated recipe):', result);
@@ -164,6 +166,10 @@ const EditRecipeModal = ({ open, onClose, recipe, onRecipeUpdated }) => {
             <div className="form-row">
               <label>Image URL <span className="form-hint">(optional)</span></label>
               <Field name="image" className="form-input" />
+            </div>
+            <div className="form-row">
+              <label>Tags <span className="form-hint">(comma separated, e.g. Vegan, Quick, Gluten-Free)</span></label>
+              <Field name="tags" className="form-input" placeholder="e.g. Vegan, Quick, Gluten-Free" />
             </div>
             <div className="form-actions">
               <button type="submit" className="form-submit-btn" disabled={isSubmitting}>

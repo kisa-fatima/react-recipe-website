@@ -117,6 +117,16 @@ const RecipePage = () => {
             <li key={idx}>{step}</li>
           ))}
         </ol>
+        {recipe.tags && recipe.tags.length > 0 && (
+          <div className="recipe-page-tags-row">
+            <strong style={{ color: 'var(--primary-color)' }}>Tags:</strong>
+            <div className="recipe-page-tags-list">
+              {recipe.tags.map((tag, idx) => (
+                <span key={idx} className="recipe-tag-pill">{tag}</span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
